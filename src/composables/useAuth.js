@@ -5,12 +5,12 @@ import {createSignalRConnection} from "src/utils/signalrConnection";
 
 export function useAuth() {
   const terminalStore = useTerminalStore()
-  const latestTerminalUid = LocalStorage.getItem('latestTerminalUid') || ''
+  const latestTerminalUid = LocalStorage.getItem('latestTerminalUid') || 'kI3kIg'
   const formValues = ref({uid: latestTerminalUid})
 
   const signInByUUid = async () => {
     await terminalStore.fetchTerminalByUuId(formValues.value.uid)
-   // await createSignalRConnection()
+    await createSignalRConnection()
   }
 
   return {

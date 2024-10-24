@@ -11,7 +11,18 @@ import {playOneRingTone} from "src/utils/helpers";
 import GeneralUpdateDialog from "components/common/GeneralUpdateDialog.vue";
 
 let signalr = null;
-
+export async function initializeSignalr() {
+  if (signalr === null) {
+    signalr = await createSignalRConnection()
+  } else {
+    try {
+      signalr.stop()
+      signalr = createSignalRConnection()
+    } catch (error) {
+      console.log("tryde error", error)
+    }
+  }
+}
 export default boot(async ({app, store, router}) => {
 
   const terminalStore = useTerminalStore(store)
@@ -38,7 +49,7 @@ export default boot(async ({app, store, router}) => {
   if (initialTerminal && initialTerminal.uid) {
 
     await terminalStore.fetchTerminalByUuId(initialTerminal.uid)
-    signalr = await createSignalRConnection()
+    await initializeSignalr()
 
     // signalr on refresh settings event
     signalr.on('refreshsettings', async (res) => {
@@ -85,7 +96,9 @@ export default boot(async ({app, store, router}) => {
         })
       }
     })
+
   }
 
   app.provide("signalr", signalr);
+
 })
