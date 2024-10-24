@@ -101,15 +101,15 @@ export function useLayout() {
   }
 
   const onClickExitApp = () => {
-    if (!settings.value.newOrder.extensionId) {
-      $q.notify({
-        type: 'warning',
-        position: 'center',
-        message: i18n.global.t('base.extensionNotFound'),
-        timeout: 2000
-      })
-      return
-    }
+    // if (!settings.value.newOrder.extensionId) {
+    //   $q.notify({
+    //     type: 'warning',
+    //     position: 'center',
+    //     message: i18n.global.t('base.extensionNotFound'),
+    //     timeout: 2000
+    //   })
+    //   return
+    // }
     $q.dialog({
       title: i18n.global.t('base.exitApp'),
       message: i18n.global.t('base.exitAppMessage'),
