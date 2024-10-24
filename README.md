@@ -1,6 +1,5 @@
-# Ruby Loyalty (loyalty)
+# Pasha Pos Application
 
-Ruby Pos Loyaly App
 
 ## Install the dependencies
 ```bash
