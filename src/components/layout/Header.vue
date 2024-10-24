@@ -37,7 +37,7 @@ const onTimeOut = () => {
             />
           </div>
           <div class="col-7">
-            <Timer :terminal-name="terminal.name"/>
+            <Timer :terminal-name="terminal?.name"/>
           </div>
         </div>
         <div class="col-3 flex items-center  ">

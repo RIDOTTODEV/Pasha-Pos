@@ -142,7 +142,7 @@ export const useTerminalStore = defineStore('terminal', {
         await this.fetchExtraSets(),
         await this.fetchPortionSets(),
         await this.fetchTags(),
-        await this.fetchSections()
+        await this.fetchSections(),
       ]
       return await Promise.all(requests)
     },
