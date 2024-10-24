@@ -112,6 +112,9 @@ const {
                 </q-item-section>
               </q-item>
               <div class="row">
+                <div class="col-12 q-ma-xs q-pa-sm bg-grey-1 q-card--bordered" v-if="order.note" >
+                  <b>{{$t('base.note')}}</b> : {{ order.note }}
+                </div>
                 <div class="col-12">
                   <q-item v-for="(item,index) in order.products" dense :key="index" clickable
                           :active="selectedOrderItem.index === index" active-class="selectedProduct"
@@ -157,6 +160,9 @@ const {
                         </div>
                         <div class="text-subtitle2  " v-if="item.extraSetId && item.extras">
                           {{ textCapitalize(terminalStore.getExtraName(item.extraSetId, item.extras)) }}
+                        </div>
+                        <div class="text-subtitle2  " v-if="item.note">
+                          {{ textCapitalize(item?.note) }}
                         </div>
                       </div>
                     </q-item-section>

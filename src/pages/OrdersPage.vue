@@ -42,8 +42,8 @@ const {
             </div>
           </div>
           <div class="col-8 row  flex justify-end  ">
-            <q-btn icon="o_cancel"   unelevated color="green-9" no-caps :label="$t('order.clearAllTickets')" @click="completeOrders" class="  "/>
-            <q-btn icon="add"    unelevated no-caps :label="$t('order.createNewOrder')" @click="router.push({name:'table'})" class=" q-ml-md is-activeBtn"/>
+            <q-btn icon="o_cancel" unelevated color="green-9" no-caps :label="$t('order.clearAllTickets')" @click="completeOrders" class="  "/>
+            <q-btn icon="add" unelevated no-caps :label="$t('order.createNewOrder')" @click="router.push({name:'table'})" class=" q-ml-md is-activeBtn"/>
             <KioskBoardInput
               styleClass=""
               show-prepend

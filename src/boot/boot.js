@@ -23,6 +23,7 @@ export async function initializeSignalr() {
     }
   }
 }
+
 export default boot(async ({app, store, router}) => {
 
   const terminalStore = useTerminalStore(store)
@@ -46,17 +47,16 @@ export default boot(async ({app, store, router}) => {
   })
   const initialTerminal = LocalStorage.getItem('terminal') || terminal.value || null
 
-  console.log("initialTerminal", initialTerminal)
-  await initializeSignalr()
   if (initialTerminal && initialTerminal.uid) {
-
     await terminalStore.fetchTerminalByUuId(initialTerminal.uid)
-
-
   }
 
+  await initializeSignalr()
   // signalr on refresh settings event
   signalr.on('refreshsettings', async (res) => {
+    if (!terminal.value?.uid){
+      return
+    }
     if (res && res.uid === terminal.value.uid) {
       await terminalStore.fetchTerminalByUuId(terminal.value.uid)
       Loading.show({
@@ -73,6 +73,9 @@ export default boot(async ({app, store, router}) => {
 
   // signalr on NewOrder event
   signalr.on('NewOrder', async (order) => {
+    if (!terminal.value?.uid){
+      return
+    }
     orderStore.setNewOrder(order)
     if (settings.value.newOrder.ringTone) {
       await playOneRingTone()
@@ -81,11 +84,17 @@ export default boot(async ({app, store, router}) => {
 
   // signalr on OrderDetailCancelled event
   signalr.on('OrderDetailCancelled', async (orderProductId, isClosed) => {
+    if (!terminal.value?.uid){
+      return
+    }
     orderStore.setOrderDetailCancelled(orderProductId, isClosed)
   })
 
   // signalr on OrderDetailUpdated event
   signalr.on('RefreshTerminal', async (res) => {
+    if (!terminal.value?.uid){
+      return
+    }
     if (res && res.uid === terminal.value.uid) {
       Dialog.create({
         component: GeneralUpdateDialog,
