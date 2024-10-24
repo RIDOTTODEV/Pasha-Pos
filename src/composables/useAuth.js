@@ -10,7 +10,7 @@ export function useAuth() {
 
   const signInByUUid = async () => {
     await terminalStore.fetchTerminalByUuId(formValues.value.uid)
-    await createSignalRConnection()
+   // await createSignalRConnection()
   }
 
   return {
