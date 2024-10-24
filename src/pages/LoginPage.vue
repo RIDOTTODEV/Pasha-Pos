@@ -1,0 +1,48 @@
+<script setup>
+import {useAuth} from "src/composables/useAuth";
+import KioskBoardInput from "components/common/KioskBoardInput.vue";
+const {formValues, signInByUUid} = useAuth()
+
+</script>
+
+<template>
+  <q-page class="q-pa-md row">
+    <div class="col-6 flex">
+      <q-card flat class="flex flex-center full-width" style="margin-right: 10px!important;">
+        <q-card-section>
+          <div class="text-h4 text-center">
+            <q-img src="/assets/ruby-login-logo.png" width="220px"/>
+          </div>
+        </q-card-section>
+      </q-card>
+    </div>
+    <div class="col-6 flex  bg-transparent">
+      <q-card flat class=" bg-transparent flex flex-center full-width" style="margin-left: 10px!important;">
+        <q-card-section>
+          <q-form @submit="signInByUUid" ref="qForm" style="width: 500px">
+            <div class="col-12">
+              <div class="text-subtitle2 text-bold q-mb-xs">
+                {{$t('base.pleaseEnterUuid')}}
+                <span class="text-negative">*</span>
+              </div>
+              <KioskBoardInput
+                v-model="formValues.uid"
+                :placeholder="$t('base.uuid')"
+                @clearValue="formValues.uid = ''"
+                @close-modal="signInByUUid"
+              />
+            </div>
+            <div class="col-12">
+              <q-btn unelevated  :label="$t('base.login')" class="q-mt-md full-width  " color="secondary"  type="submit" />
+            </div>
+          </q-form>
+        </q-card-section>
+      </q-card>
+    </div>
+
+  </q-page>
+</template>
+
+<style scoped>
+
+</style>
