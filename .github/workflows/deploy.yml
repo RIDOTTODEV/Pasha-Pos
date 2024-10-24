@@ -73,37 +73,37 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}-development
           labels: ${{ steps.meta.outputs.labels }}-development
-
-      - name: Build and push Lefkosa
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          build-args:
-            casino=lefkosa
-          platforms: linux/amd64 #,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}-lefkosa
-          labels: ${{ steps.meta.outputs.labels }}-lefkosa
-
-      - name: Build and push Girne
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          build-args:
-            casino=girne
-          platforms: linux/amd64 #,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}-girne
-          labels: ${{ steps.meta.outputs.labels }}-girne
-
-      - name: Build and push Saray
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          build-args:
-            casino=saray
-          platforms: linux/amd64 #,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}-saray
-          labels: ${{ steps.meta.outputs.labels }}-saray
+#
+#      - name: Build and push Lefkosa
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          build-args:
+#            casino=lefkosa
+#          platforms: linux/amd64 #,linux/arm64
+#          push: true
+#          tags: ${{ steps.meta.outputs.tags }}-lefkosa
+#          labels: ${{ steps.meta.outputs.labels }}-lefkosa
+#
+#      - name: Build and push Girne
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          build-args:
+#            casino=girne
+#          platforms: linux/amd64 #,linux/arm64
+#          push: true
+#          tags: ${{ steps.meta.outputs.tags }}-girne
+#          labels: ${{ steps.meta.outputs.labels }}-girne
+#
+#      - name: Build and push Saray
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          build-args:
+#            casino=saray
+#          platforms: linux/amd64 #,linux/arm64
+#          push: true
+#          tags: ${{ steps.meta.outputs.tags }}-saray
+#          labels: ${{ steps.meta.outputs.labels }}-saray
 
