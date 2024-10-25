@@ -39,6 +39,7 @@ const {
   onSelectWaiter,
   increaseProduct,
   decreaseProduct,
+  onClickCancel
 } = useCatalog();
 
 </script>
@@ -78,9 +79,6 @@ const {
                 </div>
               </q-item-section>
             </q-item>
-            <!--            <q-scroll-area style="height: 200px; width: 100%!important;">-->
-            <!--            -->
-            <!--            </q-scroll-area>-->
             <div class="q-ma-sm bg-grey-1 full-width row" v-for="(o,i) in orderPlayer.orders" :key="i">
               <div class="col-12 row" v-for="(p,k) in o.products" :key="k">
                 <div class="col-4 flex content-center">
@@ -202,7 +200,7 @@ const {
               class="col-6 hB"
               :color="$q.dark.isActive ? 'dark' : 'white'"
               :text-color="$q.dark.isActive ? 'white' : 'dark'"
-              to="/table"
+              @click="onClickCancel"
 
               style="border-right: 3px solid #e6e6e6;"
             />
@@ -386,15 +384,7 @@ const {
                 size="md"
                 @click="onSelectAlphabet(item)"
                 :class="selectedAlphabet === item ? 'is-activeBtn q-mr-sm' : 'primaryBtn q-mr-sm'"
-
               />
-              <!--              <div-->
-              <!--                :key="index"-->
-              <!--                 class="q-pa-md flex justify-center text-bold content-center text-black text-uppercase cursor-pointer"-->
-              <!--                 style="border-right: 1px solid #ccc; border-top: 1px solid #ccc;   height: 50px; width: 50px;"-->
-              <!--              >-->
-              <!--                {{ item }}-->
-              <!--              </div>-->
             </q-virtual-scroll>
           </q-card-section>
           <q-card-section>

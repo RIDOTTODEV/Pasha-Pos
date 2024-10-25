@@ -3,10 +3,12 @@ import {useTerminalStore} from "stores/terminal-store";
 import {storeToRefs} from "pinia";
 import {computed, defineAsyncComponent, inject, onMounted, ref, watch} from "vue";
 import {useQuasar,date} from "quasar";
+import {useRouter} from "vue-router";
 
 
 export function useCatalog() {
 
+  const router = useRouter()
   const bus = inject('bus')
   const $q = useQuasar()
   const terminalStore = useTerminalStore()
@@ -57,7 +59,11 @@ export function useCatalog() {
   const filteredWaiters = computed(() => {
     return waiters.value.filter(waiter => waiter.name.toLowerCase().includes(selectedAlphabet.value.toLowerCase()))
   })
-  const turkishAlphabet =  'abcçdefgğhıijklmnoöprsştuüvyz'.split('')
+  const turkishAlphabet =  'abcçdefgğhıijklmnoöprsştuüvyz'.split('').filter(item => {
+    if (waiters.value.find(waiter => waiter.name.toLowerCase().includes(item))) {
+      return item
+    }
+  })
   const playerPhotoUrl = computed(() => {
     return getTerminal.value('assistApiUrl') + '/Member/GetPhotoAsJpeg?id='+orderPlayer.value?.externalPlayerId || null
   })
@@ -326,6 +332,10 @@ export function useCatalog() {
   watch(selectedSection, async () => {
     searchTableByName.value = ''
   })
+  const onClickCancel = async () => {
+    selectedTable.value = null
+    await router.push({name: 'table'})
+  }
   return {
     terminalStore,
     orderStore,
@@ -366,5 +376,6 @@ export function useCatalog() {
     onSelectWaiter,
     increaseProduct,
     decreaseProduct,
+    onClickCancel
   }
 }
