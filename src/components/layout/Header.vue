@@ -40,7 +40,7 @@ const onTimeOut = () => {
             <Timer :terminal-name="terminal?.name"/>
           </div>
         </div>
-        <div class="col-3 flex items-center  ">
+        <div class="col-3 flex items-center">
           <KioskBoardInput
             prepend-icon="search"
             :showPrepend="true"
@@ -50,8 +50,8 @@ const onTimeOut = () => {
             @clear-value="onClearSearchInput"
 
           />
-          <q-popup-proxy style="width: 430px"  context-menu v-model="showResults"  transition-show="flip-up" transition-hide="flip-down"  >
-            <q-list bordered separator >
+          <q-popup-proxy  style="width: 430px"  context-menu v-model="showResults"  transition-show="flip-up" transition-hide="flip-down"  >
+            <q-list bordered separator>
               <q-item dense class="row" clickable v-ripple v-for="(result,index) in searchResults" :key="index">
                 <q-item-section class="col-12 text-center">
                   <q-item-label>{{result.adsoyad}}</q-item-label>
@@ -59,7 +59,11 @@ const onTimeOut = () => {
                   <q-item-label caption lines="3">  {{$t('base.playerId')}} {{result.playerId}}</q-item-label>
                   <q-item-label caption lines="4"> {{result.tableType}} - {{result.tableName}}</q-item-label>
                 </q-item-section >
-
+              </q-item>
+              <q-item dense   class="row no-box-shadow flex content-center items-center" clickable v-ripple v-if="searchResults.length === 0">
+                <div class="text-subtitle2 text-grey-9">
+                  {{$t('base.noResult')}}...
+                </div>
               </q-item>
             </q-list>
           </q-popup-proxy>

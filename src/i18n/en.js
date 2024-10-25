@@ -10,7 +10,7 @@ export default {
     orders: 'Orders',
     home:'Home',
     settings:'Settings',
-    logout:'LogOut',
+    logout:'Log Out',
     exist:'Exist',
     uuid:'UUID',
     pleaseEnterUuid:'Please enter UUID',
@@ -75,6 +75,7 @@ export default {
     fiveMinutes: "5 Minutes",
     generalUpdateSuccess: "General update success",
     selectTerminal: "Select Terminal",
+    noResult: "No Result",
   },
   settings:{
     general:'General',

@@ -59,7 +59,7 @@ export function useLayout() {
   }
 
   const onClickLogout = async () => {
-    LocalStorage.setItem('latestTerminalUid', terminal.value.uid)
+    LocalStorage.setItem('latestTerminalUid', terminal?.value?.uid)
     LocalStorage.removeItem('terminal')
     terminal.value = null
     await router.push({name: 'login'})

@@ -72,6 +72,7 @@ export default {
     fiveMinutes: "5 Dakika",
     generalUpdateSuccess: "Uygulama başarıyla güncellendi",
     selectTerminal: "Terminal Seç",
+    noResult: "Sonuç bulunamadı",
   },
   settings: {
     general: 'Genel',
