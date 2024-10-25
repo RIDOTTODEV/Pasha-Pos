@@ -36,7 +36,9 @@ const {
   onClickAddOrderNote,
   onClickCopyProduct,
   onSelectAlphabet,
-  onSelectWaiter
+  onSelectWaiter,
+  increaseProduct,
+  decreaseProduct,
 } = useCatalog();
 
 </script>
@@ -127,8 +129,9 @@ const {
                           outline
                           style="width: 40px"
                           label="-"
-                          @click="()=> item.quantity > 1 ? item.quantity-- : order.products.splice(index, 1)"
-
+                          class="text-bold"
+                          @click="decreaseProduct(index)"
+                          :text-color="selectedOrderItem?.index === index ? 'white' : 'grey-9'"
                         />
 
                         <q-btn
@@ -136,8 +139,9 @@ const {
                           outline
                           style="width: 40px"
                           :label="item.quantity"
-                          class="q-mx-sm"
-                          color="grey-9"
+                          class="q-mx-sm text-bold"
+                          :color="selectedOrderItem?.index === index ? 'white' : 'secondary'"
+                          :text-color="selectedOrderItem?.index === index ? 'white' : 'grey-9'"
                         />
                         <q-btn
                           unelevated
@@ -145,8 +149,9 @@ const {
                           outline
                           style="width: 40px"
                           label="+"
-                          @click="()=> item.quantity++"
-
+                          class="text-bold"
+                          @click="increaseProduct(index)"
+                          :text-color="selectedOrderItem?.index === index ? 'white' : 'grey-9'"
                         />
                       </div>
                     </q-item-section>
@@ -182,7 +187,7 @@ const {
               square
               :label="$t('base.next')"
               unelevated
-              class="full-width tableBtn"
+              class="full-width   is-activeBtn"
               @click="() => {
                 orderProcess = 'chooseWaiter'
               }"

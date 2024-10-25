@@ -1,5 +1,5 @@
 <template>
-  <q-dialog ref="dialogRef" @hide="onDialogHide" square style="z-index: 0!important;"  position="top" backdrop-filter="blur(4px) saturate(150%)" transition-show="slide-down" transition-hide="slide-up">
+  <q-dialog transition-duration="100" ref="dialogRef" @hide="onDialogHide" square style="z-index: 0!important;"  position="top" backdrop-filter="blur(4px) saturate(150%)" transition-show="slide-down" transition-hide="slide-up">
     <q-card flat class="q-dialog-plugin" style="min-width: 700px;margin-top: 100px">
       <q-form @submit="onSubmit">
         <q-card-section class="q-pa-none">
@@ -14,7 +14,7 @@
           />
         </q-card-section>
         <q-card-actions class="q-pa-none">
-           <q-btn size="lg" square class="full-width" color="secondary" unelevated :label="$t('base.save')" type="submit"/>
+           <q-btn size="lg" square class="full-width" color="blue-grey-8" unelevated :label="$t('base.save')" type="submit"/>
         </q-card-actions>
       </q-form>
     </q-card>

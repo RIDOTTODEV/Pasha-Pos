@@ -614,7 +614,7 @@ const statusColors = [
   border-bottom-width: 0px;
   border-left-width: 0px;
   border-width: 9px 0 0 11px;
-  border-top-color: #3e4f72;
+  border-top-color: #2d3236;
 }
 
 .doc-card-title {
@@ -622,7 +622,7 @@ const statusColors = [
   padding: 4px 8px 4px 28px;
   position: relative;
   border-radius: 3px 5px 5px 0;
-  background: #3e4f72;
+  background: #2d3236;
   color: white;
   font-size: 14px;
   letter-spacing: .7px;

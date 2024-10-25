@@ -306,7 +306,23 @@ export function useCatalog() {
       }
     }
   }
-
+  const increaseProduct = (productIndex) => {
+    order.value.products[productIndex].quantity++
+  }
+  const decreaseProduct = (productIndex) => {
+    if (order.value.products[productIndex].quantity > 1) {
+      order.value.products[productIndex].quantity--
+    } else {
+      order.value.products.splice(productIndex, 1)
+      if (selectedOrderItem.value.index === productIndex) {
+        selectedOrderItem.value = {
+          index: -1,
+          product: null,
+        }
+      }
+      orderProcess.value = 'product'
+    }
+  }
   watch(selectedSection, async () => {
     searchTableByName.value = ''
   })
@@ -335,6 +351,7 @@ export function useCatalog() {
     selectedAlphabet,
     orderPlayer,
     playerPhotoUrl,
+    filteredWaiters,
     onClickCategory,
     onClickBack,
     onClickFavorite,
@@ -347,6 +364,7 @@ export function useCatalog() {
     onClickCopyProduct,
     onSelectAlphabet,
     onSelectWaiter,
-    filteredWaiters
+    increaseProduct,
+    decreaseProduct,
   }
 }

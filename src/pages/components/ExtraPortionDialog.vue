@@ -16,7 +16,7 @@
               :val="portion.name"
               :label="portion.name"
               class="text-capitalize"
-              color="secondary"
+              color="blue-grey-8"
               size="xl"
               :rules="[val => !val  || $t('base.requiredField',{fieldName: $t('base.portion')})]"
             />
@@ -32,7 +32,7 @@
               :key="index"
               v-model="formValues.extras"
               class="text-capitalize"
-              color="secondary"
+              color="blue-grey-8"
               size="xl"
               :val="extra.name"
               :label="extra.name"
@@ -41,7 +41,7 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn color="secondary" flat :label="$t('base.cancel')" @click="onDialogCancel"/>
-          <q-btn color="secondary" unelevated :label="$t('base.save')" type="submit"/>
+          <q-btn color="blue-grey-8" unelevated :label="$t('base.save')" type="submit"/>
         </q-card-actions>
       </q-form>
     </q-card>

@@ -131,9 +131,13 @@ KioskBoard.init({...kioskBoardOption});
 onMounted(() => {
   KioskBoard.run('.virtual-keyboard')
   if (props.autofocus) {
-    if (props.modelValue.length === 0) {
-      inputRef.value.focus()
-    }
+     if (props.modelValue.length === 0) {
+       inputRef.value.focus()
+     }else {
+       setTimeout(() => {
+          inputRef.value.focus()
+       }, 500)
+     }
   }
 })
 
@@ -142,8 +146,10 @@ const handleInput = debounce(($event) => {
 }, props.debounce)
 
 const onFocusInput = () => {
-  KioskBoard.init({...kioskBoardOption});
-
+//  KioskBoard.init({...kioskBoardOption});
+setTimeout(()=> {
+  KioskBoard.run('.virtual-keyboard')
+},1000)
 }
 
 </script>
@@ -159,7 +165,7 @@ const onFocusInput = () => {
         class="full-width q-field__native virtual-keyboard  "
         :placeholder="placeholder"
         ref="inputRef"
-        @focus="onFocusInput"
+
       />
     </template>
     <template v-slot:prepend v-if="showPrepend">
@@ -170,7 +176,7 @@ const onFocusInput = () => {
              @click="emits('clearValue')"/>
     </template>
   </q-field>
-  <q-field   v-else     bg-color="white"  type="textarea" dense class="full-width" :placeholder="placeholder">
+  <q-field v-else bg-color="white"  type="textarea" dense class="full-width" :placeholder="placeholder">
     <template v-slot:control>
       <textarea
         :value="modelValue"
@@ -179,12 +185,14 @@ const onFocusInput = () => {
         class="full-width q-field__native virtual-keyboard  q-pa-sm"
         ref="inputRef"
         rows="7"
+
       />
     </template>
     <template v-slot:prepend v-if="showPrepend">
       <q-icon :name="prependIcon" v-if="prependIcon" style="margin-top: 5px"/>
     </template>
   </q-field>
+
 </template>
 
 <style scoped>
