@@ -2,7 +2,7 @@
 import {getNameOfObject, textCapitalize} from "src/utils/helpers";
 import {useCatalog} from "src/composables/useCatalog";
 import KioskBoardInput from "components/common/KioskBoardInput.vue";
-import {onUnmounted} from "vue";
+import {computed, onUnmounted, ref} from "vue";
 import {date} from "quasar";
 
 onUnmounted(() => {
@@ -41,7 +41,9 @@ const {
   decreaseProduct,
   onClickCancel
 } = useCatalog();
-
+const maxHeight = computed(() => {
+  return orderPlayer?.orders?.length > 0 ? '40%' : '70%'
+})
 </script>
 
 <template>
@@ -95,7 +97,7 @@ const {
               </div>
             </div>
           </q-card-section>
-          <div :style="'display: flex; flex-direction: column;flex: 15 0 auto;overflow: auto; max-height: 40%;' ">
+          <div  :style="{display:'flex',flexDirection:'column',flex:'15 0 auto', overflow:'auto',maxHeight:maxHeight}">
             <q-card-section class="product_list q-pa-none" style="">
               <q-item clickable v-ripple class="col-12 q-mt-xs q-pt-none q-pb-none q-pr-sm q-pl-sm bg-red-1" dense>
                 <q-item-section>
