@@ -157,15 +157,15 @@ const {
                       <div class="text-h6">
                         {{ textCapitalize(item.productName) }}
                       </div>
-                      <div style="margin-top: -5px">
-                        <div class="text-subtitle2  " v-if="item.portionSetId && item.portion">
+                      <div class="row flex justify-start" style="margin-top: -5px">
+                        <div class="text-subtitle2  q-pr-md" v-if="item.portionSetId && item.portion">
                           {{ textCapitalize(item.portion) }}
                         </div>
-                        <div class="text-subtitle2  " v-if="item.extraSetId && item.extras">
-                          {{ textCapitalize(terminalStore.getExtraName(item.extraSetId, item.extras)) }}
+                        <div class="text-subtitle2  q-pr-md" v-if="item.extraSetId && item.extras">
+                          {{ textCapitalize(item.extras) }},
                         </div>
-                        <div class="text-subtitle2  " v-if="item.note">
-                          {{ textCapitalize(item?.note) }}
+                        <div class="text-subtitle2  q-pr-md" v-if="item.note">
+                         <b>{{$t('base.note')}}:</b> {{ textCapitalize(item?.note) }}
                         </div>
                       </div>
                     </q-item-section>

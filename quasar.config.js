@@ -120,7 +120,8 @@ module.exports = configure(function (ctx) {
         'Loading',
         'LoadingBar',
         'Meta',
-        'BottomSheet'
+        'BottomSheet',
+        'Cookies',
       ]
     },
 

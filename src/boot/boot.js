@@ -2,7 +2,7 @@ import {boot} from 'quasar/wrappers'
 import {useThemeStore} from "stores/theme-store";
 import {useTerminalStore} from "stores/terminal-store";
 import {useOrderStore} from "stores/order-store";
-import {Loading, LocalStorage, QSpinnerGears, Dialog} from "quasar";
+import {Loading, LocalStorage, QSpinnerGears, Dialog,Cookies} from "quasar";
 import {createSignalRConnection} from "src/utils/signalrConnection";
 import {storeToRefs} from "pinia";
 import {i18n} from "boot/i18n";
@@ -25,6 +25,9 @@ export async function initializeSignalr() {
 }
 
 export default boot(async ({app, store, router}) => {
+
+  const latestTerminalUid = LocalStorage.getItem('latestTerminalUid') || Cookies.get('latestTerminalUid') || null
+
 
   const terminalStore = useTerminalStore(store)
   const {terminal} = storeToRefs(terminalStore)

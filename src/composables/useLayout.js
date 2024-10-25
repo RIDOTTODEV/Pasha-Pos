@@ -1,6 +1,6 @@
 import {defineAsyncComponent, ref, watch, inject} from 'vue'
 import {useRoute, useRouter} from "vue-router";
-import {date, LocalStorage, useQuasar,} from "quasar";
+import {date, LocalStorage, useQuasar,Cookies} from "quasar";
 import {storeToRefs} from "pinia";
 import {useThemeStore} from "stores/theme-store";
 import {useTerminalStore} from "stores/terminal-store";
@@ -61,7 +61,7 @@ export function useLayout() {
   const onClickLogout = async () => {
     LocalStorage.setItem('latestTerminalUid', terminal.value.uid)
     LocalStorage.removeItem('terminal')
-    //terminal.value = null
+    terminal.value = null
     await router.push({name: 'login'})
   }
 
@@ -101,15 +101,6 @@ export function useLayout() {
   }
 
   const onClickExitApp = () => {
-    // if (!settings.value.newOrder.extensionId) {
-    //   $q.notify({
-    //     type: 'warning',
-    //     position: 'center',
-    //     message: i18n.global.t('base.extensionNotFound'),
-    //     timeout: 2000
-    //   })
-    //   return
-    // }
     $q.dialog({
       title: i18n.global.t('base.exitApp'),
       message: i18n.global.t('base.exitAppMessage'),
@@ -127,7 +118,10 @@ export function useLayout() {
         autofocus: true
       }
     }).onOk(async () => {
+
+      Cookies.set('latestTerminalUid', terminal.value.uid)
       window.postMessage('exitApp', '*')
+      terminal.value = null
     })
   }
 

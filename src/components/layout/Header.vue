@@ -48,6 +48,7 @@ const onTimeOut = () => {
             v-model="searchInput"
             @close-modal="onSubmitSearch"
             @clear-value="onClearSearchInput"
+
           />
           <q-popup-proxy style="width: 430px"  context-menu v-model="showResults"  transition-show="flip-up" transition-hide="flip-down"  >
             <q-list bordered separator >
@@ -84,10 +85,9 @@ const onTimeOut = () => {
               @click="onClickLogout"
             />
             <q-btn
-
               unelevated
               :label="$t('base.exist')"
-              class="  hB primaryBtn "
+              class="hB primaryBtn "
               @click="onClickExitApp"
             />
             <q-select

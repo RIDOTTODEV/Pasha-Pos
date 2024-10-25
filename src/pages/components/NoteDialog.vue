@@ -14,7 +14,7 @@
           />
         </q-card-section>
         <q-card-actions class="q-pa-none">
-           <q-btn size="lg" square class="full-width" color="blue-grey-8" unelevated :label="$t('base.save')" type="submit"/>
+           <q-btn no-caps icon="save" size="lg" square class="full-width" color="blue-grey-8" unelevated :label="$t('base.save')" type="submit"/>
         </q-card-actions>
       </q-form>
     </q-card>

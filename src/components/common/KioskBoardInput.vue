@@ -129,15 +129,13 @@ const kioskBoardOption = {
 KioskBoard.init({...kioskBoardOption});
 
 onMounted(() => {
-  KioskBoard.run('.virtual-keyboard')
+  setTimeout(() =>{
+    KioskBoard.run('.virtual-keyboard')
+  },300)
   if (props.autofocus) {
-     if (props.modelValue.length === 0) {
-       inputRef.value.focus()
-     }else {
-       setTimeout(() => {
-          inputRef.value.focus()
-       }, 500)
-     }
+    setTimeout(() => {
+      inputRef.value.focus()
+    }, 500)
   }
 })
 
@@ -145,12 +143,6 @@ const handleInput = debounce(($event) => {
   emits('update:modelValue', $event.target.value)
 }, props.debounce)
 
-const onFocusInput = () => {
-//  KioskBoard.init({...kioskBoardOption});
-setTimeout(()=> {
-  KioskBoard.run('.virtual-keyboard')
-},1000)
-}
 
 </script>
 
@@ -165,7 +157,6 @@ setTimeout(()=> {
         class="full-width q-field__native virtual-keyboard  "
         :placeholder="placeholder"
         ref="inputRef"
-
       />
     </template>
     <template v-slot:prepend v-if="showPrepend">
@@ -185,14 +176,12 @@ setTimeout(()=> {
         class="full-width q-field__native virtual-keyboard  q-pa-sm"
         ref="inputRef"
         rows="7"
-
       />
     </template>
     <template v-slot:prepend v-if="showPrepend">
       <q-icon :name="prependIcon" v-if="prependIcon" style="margin-top: 5px"/>
     </template>
   </q-field>
-
 </template>
 
 <style scoped>
@@ -201,4 +190,9 @@ setTimeout(()=> {
   border: 1px solid #d5d5d5;
   border-radius: 4px;
 }
+#KioskBoard-VirtualKeyboard .kioskboard-wrapper .kioskboard-row-dynamic span {
+  max-width: 5.0%!important;
+  margin: 9px 8px 6px!important;
+}
+
 </style>

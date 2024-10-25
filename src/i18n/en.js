@@ -74,6 +74,7 @@ export default {
     oneMinute: "1 Minute",
     fiveMinutes: "5 Minutes",
     generalUpdateSuccess: "General update success",
+    selectTerminal: "Select Terminal",
   },
   settings:{
     general:'General',

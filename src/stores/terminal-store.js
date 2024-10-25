@@ -13,7 +13,8 @@ export const useTerminalStore = defineStore('terminal', {
     waiters: [],
     tables: [],
     extraSets: [],
-    portionSets: []
+    portionSets: [],
+    terminals: [],
   }),
 
   getters: {
@@ -180,6 +181,13 @@ export const useTerminalStore = defineStore('terminal', {
     },
     async getCurrentTable(searchString) {
       return await axios.get(`${this.terminal.assistApiUrl}/Member/GetCurrentTable?searchString=${searchString}`)
+    },
+    async fetchTerminals() {
+      await api.get('Terminal/GetAll', {params: {Take: 999, Skip: 0}}).then(res => {
+        this.terminals = res.data.data
+      }).catch(err => {
+        fireNotify(i18n.global.t('base.errorOccurred', {message: err.message}), 'failed', null, 1500, 'negative')
+      })
     }
   }
 })

@@ -1,6 +1,7 @@
 <script setup>
 import {useOrder} from "src/composables/useOrder";
 import KioskBoardInput from "components/common/KioskBoardInput.vue";
+import {textCapitalize} from "../utils/helpers";
 
 const {
   getTerminalOrders,
@@ -87,7 +88,7 @@ const {
             <q-card-section class="q-pa-xs flex  justify-center" v-if="props.row.note">
               <div class="text-subtitle1 text-left text-bold flex   items-center q-mr-sm">
                 <q-icon name="comment" size="17px" class="q-mr-xs q-mt-xs"/>
-                {{ props.row.note }}
+                {{ textCapitalize(props.row.note) }}
               </div>
             </q-card-section>
             <q-separator size="2px"/>
@@ -98,7 +99,7 @@ const {
                 <span> {{ product.quantity }} X {{ product.productName }}</span>
                  <span  class="q-ml-md text-grey-8" v-if="product.portion">{{product.portion}}</span>
                  <span class="q-ml-md text-grey-8" v-if="product.extras">{{product.extras}}</span>
-                 <span class="q-ml-md   row col-12 flex flex-center text-subtitle1 text-bold" v-if="product.note">{{$t('base.note')}}:  <span class="q-ml-md">{{product.note}}</span>...</span>
+                 <span class="q-ml-md   row col-12 flex flex-center text-subtitle1 text-bold" v-if="product.note">{{$t('base.note')}}:  <span class="q-ml-md">{{textCapitalize(product.note)}}</span>...</span>
                </div>
               </div>
               <div class="col-12" v-if="index !== props.row.products.filter(p => p.status === 'New').length - 1">
@@ -106,9 +107,9 @@ const {
               </div>
             </q-card-section>
             <q-card-section class="q-pa-sm bg-dark cursor-pointer full-width " @click="deliverOrder(props.row)" style="margin-top: auto;position: relative;">
-              <div class="row blink flex  items-center  ">
-                <q-icon name="touch_app" size="25px" />
-                <div class="text-h5 text-bold q-ml-xl"> {{ $t('order.newTicket') }} </div>
+              <div class="row blink flex justify-center  items-center  ">
+                <q-icon name="touch_app" class="q-mr-md" size="25px" />
+                <div class="text-h5 text-bold "> {{ $t('order.newTicket') }} </div>
               </div>
             </q-card-section>
           </q-card>

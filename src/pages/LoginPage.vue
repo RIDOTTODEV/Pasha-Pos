@@ -1,7 +1,7 @@
 <script setup>
 import {useAuth} from "src/composables/useAuth";
 import KioskBoardInput from "components/common/KioskBoardInput.vue";
-const {formValues, signInByUUid} = useAuth()
+const {formValues,terminals, showTerminals, signInByUUid} = useAuth()
 
 </script>
 
@@ -20,8 +20,24 @@ const {formValues, signInByUUid} = useAuth()
       <q-card flat class=" bg-transparent flex flex-center full-width" style="margin-left: 10px!important;">
         <q-card-section>
           <q-form @submit="signInByUUid" ref="qForm" style="width: 500px">
+            <q-select
+              v-model="formValues.uid"
+              :options="terminals"
+              :label="$t('base.selectTerminal')"
+              @clearValue="formValues.uid = ''"
+              emit-value
+              map-options
+              outlined
+              dense
+              bg-color="white"
+              option-value="uid"
+              option-label="name"
+              class="q-mb-md"
+              color="secondary"
+              v-if="showTerminals"
+              />
             <div class="col-12">
-              <div class="text-subtitle2 text-bold q-mb-xs">
+              <div class="text-subtitle2 text-bold q-mb-xs" @click="showTerminals = !showTerminals">
                 {{$t('base.pleaseEnterUuid')}}
                 <span class="text-negative">*</span>
               </div>

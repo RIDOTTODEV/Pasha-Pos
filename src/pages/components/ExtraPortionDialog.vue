@@ -40,8 +40,8 @@
           </div>
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn color="secondary" style="width: 150px" icon="close" flat :label="$t('base.cancel')" @click="onDialogCancel"/>
-          <q-btn color="blue-grey-8" style="width: 150px" icon="save" unelevated :label="$t('base.save')" type="submit"/>
+          <q-btn no-caps color="secondary" style="width: 150px" icon="close" flat :label="$t('base.cancel')" @click="onDialogCancel"/>
+          <q-btn no-caps color="blue-grey-8" style="width: 150px" icon="save" unelevated :label="$t('base.save')" type="submit"/>
         </q-card-actions>
       </q-form>
     </q-card>
