@@ -8,11 +8,15 @@ defineProps({
     default: () => 'Terminal'
   }
 })
-const time = ref(new Date().toLocaleTimeString());
+const time = ref(new Date().toLocaleTimeString('tr-TR'));
 setInterval(() => {
-  time.value = new Date().toLocaleTimeString();
+  time.value = new Date().toLocaleTimeString('tr-TR');
 }, 1000);
-const date = ref(new Date().toDateString());
+const date = ref(new Date().toLocaleDateString('tr-TR',{
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+}));
 </script>
 
 <template>

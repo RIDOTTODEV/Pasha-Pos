@@ -71,24 +71,28 @@ const onTimeOut = () => {
               :label="$t('base.home')"
               class="q-mr-md hB primaryBtn"
               @click="router.push({name:'home'})"
+              no-caps
             />
             <q-btn
               unelevated
               :label="$t('base.settings')"
               class="q-mr-md hB primaryBtn"
               @click="router.push({name:'settings'})"
+              no-caps
             />
             <q-btn
               unelevated
               :label="$t('base.logout')"
               class="q-mr-md hB primaryBtn"
               @click="onClickLogout"
+              no-caps
             />
             <q-btn
               unelevated
               :label="$t('base.exist')"
               class="hB primaryBtn "
               @click="onClickExitApp"
+              no-caps
             />
             <q-select
               v-model="themeStore.selectedLocale"

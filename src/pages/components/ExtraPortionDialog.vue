@@ -24,7 +24,7 @@
         </q-card-section>
         <q-card-section v-if="extras.length > 0">
           <div class="row">
-            <div class="text-h6">{{ $t('base.extras') }} <span class="text-negative">*</span></div>
+            <div class="text-h6">{{ $t('base.extras') }} </div>
           </div>
           <div class="q-gutter-sm">
             <q-checkbox
@@ -33,7 +33,7 @@
               v-model="formValues.extras"
               class="text-capitalize"
               color="blue-grey-8"
-              size="xl"
+              size="lg"
               :val="extra.name"
               :label="extra.name"
             />
