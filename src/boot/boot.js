@@ -2,15 +2,15 @@ import {boot} from 'quasar/wrappers'
 import {useThemeStore} from "stores/theme-store";
 import {useTerminalStore} from "stores/terminal-store";
 import {useOrderStore} from "stores/order-store";
-import {Loading, LocalStorage, QSpinnerGears, Dialog,Cookies} from "quasar";
+import {Loading, LocalStorage, QSpinnerGears, Dialog, Cookies} from "quasar";
 import {createSignalRConnection} from "src/utils/signalrConnection";
 import {storeToRefs} from "pinia";
 import {i18n} from "boot/i18n";
 import {bus} from "boot/bus";
-import {playOneRingTone} from "src/utils/helpers";
 import GeneralUpdateDialog from "components/common/GeneralUpdateDialog.vue";
 
 let signalr = null;
+
 export async function initializeSignalr() {
   if (signalr === null) {
     signalr = await createSignalRConnection()
@@ -57,7 +57,7 @@ export default boot(async ({app, store, router}) => {
   await initializeSignalr()
   // signalr on refresh settings event
   signalr.on('refreshsettings', async (res) => {
-    if (!terminal.value?.uid){
+    if (!terminal.value?.uid) {
       return
     }
     if (res && res.uid === terminal.value.uid) {
@@ -76,18 +76,15 @@ export default boot(async ({app, store, router}) => {
 
   // signalr on NewOrder event
   signalr.on('NewOrder', async (order) => {
-    if (!terminal.value?.uid){
+    if (!terminal.value?.uid) {
       return
     }
     orderStore.setNewOrder(order)
-    if (settings.value.newOrder.ringTone) {
-      await playOneRingTone()
-    }
   })
 
   // signalr on OrderDetailCancelled event
   signalr.on('OrderDetailCancelled', async (orderProductId, isClosed) => {
-    if (!terminal.value?.uid){
+    if (!terminal.value?.uid) {
       return
     }
     orderStore.setOrderDetailCancelled(orderProductId, isClosed)
@@ -95,10 +92,10 @@ export default boot(async ({app, store, router}) => {
 
   // signalr on OrderDetailUpdated event
   signalr.on('RefreshTerminal', async (res) => {
-    if (!terminal.value?.uid){
+    if (!terminal.value?.uid) {
       return
     }
-    if (res && res.now === true){
+    if (res && res.now === true) {
       bus.emit('showProgressBar', 100)
       return
     }

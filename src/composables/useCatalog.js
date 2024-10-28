@@ -78,6 +78,7 @@ export function useCatalog() {
 
   const initializeMenu = () => {
     if (terminalMenu.value.length === 1) {
+      categoryHistory.value.push(terminalMenu.value[0])
       categories.value = terminalMenu.value[0].categories || []
     } else {
       categories.value = terminalMenu.value

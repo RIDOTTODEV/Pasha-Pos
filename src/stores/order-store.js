@@ -1,7 +1,8 @@
 import {defineStore} from 'pinia'
 import {api} from "boot/axios";
 import {useTerminalStore} from "stores/terminal-store";
-import {parseParams} from "src/utils/helpers";
+import {useThemeStore} from "stores/theme-store";
+import {parseParams,playOneRingTone} from "src/utils/helpers";
 export const useOrderStore = defineStore('order', {
   state: () => ({
     selectedSection: null,
@@ -46,19 +47,25 @@ export const useOrderStore = defineStore('order', {
          this.terminalOrders = res.data.data
       })
     },
-    setNewOrder(order) {
+      setNewOrder(order) {
       const terminalStore = useTerminalStore()
       const {getTerminalTags, getTerminalSections, getTerminalMenuIds} = terminalStore
+      const themeStore = useThemeStore()
+      const {settings} = themeStore
       order.products = order.products.filter(product =>
         getTerminalTags.includes(product.orderTagId)
         && getTerminalMenuIds.includes(product.menuId)
-      ).map(product => {
+      ).map(async product => {
+        if (settings.newOrder.ringTone) {
+          await playOneRingTone()
+        }
         return {
           ...product,
           status:'New'
         }
       })
       if (order.products.length > 0 && getTerminalSections.includes(order.sectionId)) {
+
         this.terminalOrders.unshift(order)
       }
     },
