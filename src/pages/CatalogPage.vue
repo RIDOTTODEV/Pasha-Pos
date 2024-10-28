@@ -2,14 +2,13 @@
 import {getNameOfObject, textCapitalize} from "src/utils/helpers";
 import {useCatalog} from "src/composables/useCatalog";
 import KioskBoardInput from "components/common/KioskBoardInput.vue";
-import {computed, onUnmounted, ref} from "vue";
+import {computed, onUnmounted} from "vue";
 import {date} from "quasar";
 
 onUnmounted(() => {
   selectedTable.value = null
 })
 const {
-  terminalStore,
   fetchFavoriteProduct,
   selectedTable,
   order,
