@@ -98,6 +98,10 @@ export default boot(async ({app, store, router}) => {
     if (!terminal.value?.uid){
       return
     }
+    if (res && res.now === true){
+      bus.emit('showProgressBar', 100)
+      return
+    }
     if (res && res.uid === terminal.value.uid) {
       Dialog.create({
         component: GeneralUpdateDialog,
