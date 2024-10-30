@@ -134,8 +134,10 @@ body {
   max-height: 400px!important;
 }
 .body--light {
+
   .kioskInput {
-    background-color: $grey-1!important;
+    background-color: white!important;
+    color: black;
   }
   .primaryBtn {
     background-color: $grey-3!important;
@@ -224,10 +226,11 @@ body {
 }
 
 .body--dark {
+
   .kioskInput {
     background-color: $grey-10!important;
     color: white;
-    border: 1px solid $grey-7!important;
+    //border: 1px solid $grey-7!important;
   }
   .primaryBtn {
     background-color: $grey-9 !important;

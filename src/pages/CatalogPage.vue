@@ -48,7 +48,7 @@ const maxHeight = computed(() => {
 <template>
   <q-page class="q-pl-md q-pr-md q-pt-sm">
     <div class="row">
-      <div class="col-4 q-mt-xs bg-white">
+      <div class="col-4 q-mt-xs app-cart">
         <div class="q-pb-none q-pt-xs q-pr-sm q-pl-sm row flex justify-between"
              style="flex: 0 0 auto; max-height: 30%; overflow: auto">
           <div class="text-subtitle1 flex content-center items-center">
@@ -99,8 +99,8 @@ const maxHeight = computed(() => {
           <div  :style="{display:'flex',flexDirection:'column',flex:'15 0 auto', overflow:'auto',maxHeight:maxHeight}">
             <q-card-section class="product_list q-pa-none" style="">
               <q-item clickable v-ripple class="col-12 q-mt-xs q-pt-none q-pb-none q-pr-sm q-pl-sm bg-red-1" dense>
-                <q-item-section>
-                  <q-item-label>
+                <q-item-section >
+                  <q-item-label class="text-dark">
                     {{ $t('base.newOrderList') }}
                   </q-item-label>
                 </q-item-section>

@@ -147,14 +147,14 @@ const handleInput = debounce(($event) => {
 </script>
 
 <template>
-  <q-field outlined :type="type" color="secondary" dense :class="styleClass" v-if="type === 'text'">
+  <q-field outlined class="kioskInput" :type="type" color="secondary" dense :class="styleClass" v-if="type === 'text'">
     <template v-slot:control>
       <input
         :value="modelValue"
         @change="handleInput($event)"
         data-kioskboard-placement="bottom"
         type="text"
-        class="full-width q-field__native virtual-keyboard  "
+        class="full-width q-field__native virtual-keyboard    "
         :placeholder="placeholder"
         ref="inputRef"
       />
@@ -167,13 +167,13 @@ const handleInput = debounce(($event) => {
              @click="emits('clearValue')"/>
     </template>
   </q-field>
-  <q-field v-else bg-color="white"  type="textarea" dense class="full-width" :placeholder="placeholder">
+  <q-field v-else bg-color="white"   type="textarea" dense class="full-width kioskInput" :placeholder="placeholder">
     <template v-slot:control>
       <textarea
         :value="modelValue"
         @change="handleInput($event)"
         data-kioskboard-placement="bottom"
-        class="full-width q-field__native virtual-keyboard  q-pa-sm"
+        class="full-width q-field__native virtual-keyboard  q-pa-sm kioskInput"
         ref="inputRef"
         rows="7"
       />
