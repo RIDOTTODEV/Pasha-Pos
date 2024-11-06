@@ -15,5 +15,5 @@
 <script setup>
 import {useLayout} from "src/composables/useLayout";
 
-const {leftDrawerOpen, AppHeader, SidebarMenus, router} = useLayout()
+const {leftDrawerOpen, AppHeader} = useLayout()
 </script>

@@ -76,6 +76,13 @@ export const useTerminalStore = defineStore('terminal', {
   actions: {
     async fetchTerminalByUuId(uid) {
       await api.get(`Terminal/GetTerminalSettings?uid=${uid}`).then(async res => {
+        if (res.data) {
+          for (const key in res.data) {
+            if (key === "tags" || key === 'restore' || key === 'askPasswordRestoring' || key === 'sections') {
+              res.data[key] = res.data[key] !== null ? res.data[key] : []
+            }
+          }
+        }
         this.terminal = res.data || null
         const initTerminal = this.initTerminal()
         await LocalStorage.setItem('terminal', this.terminal)

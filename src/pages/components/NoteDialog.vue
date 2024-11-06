@@ -2,7 +2,7 @@
   <q-dialog transition-duration="100" ref="dialogRef" @hide="onDialogHide" square style="z-index: 0!important;"  position="top" backdrop-filter="blur(4px) saturate(150%)" transition-show="slide-down" transition-hide="slide-up">
     <q-card flat class="q-dialog-plugin bg-transparent" style="min-width: 700px;margin-top: 100px">
       <q-form @submit="onSubmit">
-        <q-card-section class="q-pa-none  ">
+        <q-card-section class="q-pa-none">
           <KioskBoardInput
             square
             @close-modal="onSubmit"
