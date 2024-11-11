@@ -8,7 +8,7 @@ let i18n = createI18n({})
 export default boot(({app, store}) => {
   const initialLocale = LocalStorage.getItem('locale') || 'en'
   let initialDarkMode = LocalStorage.getItem('darkMode')
-  if (initialDarkMode === null) { initialDarkMode = true }
+  if (initialDarkMode === null) { initialDarkMode = false }
 
   try {
     const themeStore = useThemeStore(store)
