@@ -79,7 +79,13 @@ export function useCatalog() {
   const initializeMenu = () => {
     if (terminalMenu.value.length === 1) {
       categoryHistory.value.push(terminalMenu.value[0])
-      categories.value = terminalMenu.value[0].categories || []
+      if (terminalMenu.value[0].categories.length === 1) {
+        categoryHistory.value.push(terminalMenu.value[0].categories[0])
+        categories.value = terminalMenu.value[0].categories[0].categories || terminalMenu.value[0].categories[0].subCategories || []
+        products.value = terminalMenu.value[0].categories[0].products || []
+      } else {
+        categories.value = terminalMenu.value[0].categories || []
+      }
     } else {
       categories.value = terminalMenu.value
     }
