@@ -6,6 +6,8 @@ export default {
     dashboard: 'Dashboard',
   },
   base:{
+    orderedByName:'Ordered By Name',
+    pleaseSelectAWaiter:'Please select a waiter',
     newOrder: 'New Order',
     orders: 'Orders',
     home:'Home',

@@ -69,9 +69,9 @@ const {
               </div>
             </q-card-section>
             <q-separator size="2px"/>
-            <q-card-section class="q-pa-xs flex  justify-center" v-if="props.row.playerName">
-              <div class="text-subtitle1 text-left text-bold flex items-center q-ml-sm">
-                <q-icon name="o_person" size="20px" class="q-mr-xs"/>
+            <q-card-section class="q-pa-xs flex  justify-center no-wrap" v-if="props.row.playerName">
+              <q-icon name="o_person" size="20px" class="q-mr-xs"/>
+              <div class="text-bold q-ml-sm">
                 {{ props.row.playerName	 }}
               </div>
             </q-card-section>
@@ -86,8 +86,8 @@ const {
             <q-separator size="2px" v-if="props.row.note"/>
 
             <q-card-section class="q-pa-xs flex  justify-center" v-if="props.row.note">
-              <div class="text-subtitle1 text-left text-bold flex   items-center q-mr-sm">
-                <q-icon name="comment" size="17px" class="q-mr-xs q-mt-xs"/>
+              <q-icon name="o_comment" size="17px" class="q-mr-xs q-mt-xs float-left"/>
+              <div class=" q-mr-sm">
                 {{ textCapitalize(props.row.note) }}
               </div>
             </q-card-section>
@@ -99,7 +99,7 @@ const {
                 <span> {{ product.quantity }} X {{ product.productName }}</span>
                  <span  class="q-ml-md text-grey-8" v-if="product.portion">{{product.portion}}</span>
                  <span class="q-ml-md text-grey-8" v-if="product.extras">{{product.extras}}</span>
-                 <span class="q-ml-md   row col-12 flex flex-center text-subtitle1 text-bold" v-if="product.note">{{$t('base.note')}}:  <span class="q-ml-md">{{textCapitalize(product.note)}}</span>...</span>
+                 <span class="q-ml-md   row col-12 flex flex-center text-subtitle2  " v-if="product.note">{{$t('base.note')}}:  <span class="q-ml-sm">{{textCapitalize(product.note)}}</span>...</span>
                </div>
               </div>
               <div class="col-12" v-if="index !== props.row.products.filter(p => p.status === 'New').length - 1">

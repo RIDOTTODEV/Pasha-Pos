@@ -38,7 +38,8 @@ const {
   onSelectWaiter,
   increaseProduct,
   decreaseProduct,
-  onClickCancel
+  onClickCancel,
+  onClickNext
 } = useCatalog();
 const maxHeight = computed(() => {
   return orderPlayer?.orders?.length > 0 ? '40%' : '70%'
@@ -94,7 +95,10 @@ const maxHeight = computed(() => {
                   <div class="text-subtitle2">{{ date.formatDate(p.createdAt, 'DD.MM.YYYY HH:mm') }}</div>
                 </div>
               </div>
-            </div>
+              <div class="text-caption">
+                <b>{{$t('base.orderedByName')}}: </b>{{o?.orderedByFullName}}
+              </div>
+             </div>
           </q-card-section>
           <div  :style="{display:'flex',flexDirection:'column',flex:'15 0 auto', overflow:'auto',maxHeight:maxHeight}">
             <q-card-section class="product_list q-pa-none" style="">
@@ -187,9 +191,7 @@ const maxHeight = computed(() => {
               :label="$t('base.next')"
               unelevated
               class="full-width   is-activeBtn"
-              @click="() => {
-                orderProcess = 'chooseWaiter'
-              }"
+              @click="onClickNext"
               size="30px"
               style="border-bottom: 3px solid #e6e6e6"
             />
@@ -373,30 +375,40 @@ const maxHeight = computed(() => {
             </div>
           </q-card-section>
           <q-card-section class="q-pt-none">
-            <q-virtual-scroll
-              :items="turkishAlphabet"
-              virtual-scroll-horizontal
-              v-slot="{ item, index }"
-            >
-              <q-btn
-                :key="index"
-                :label="item"
-                unelevated
-                size="md"
-                @click="onSelectAlphabet(item)"
-                :class="selectedAlphabet === item ? 'is-activeBtn q-mr-sm' : 'primaryBtn q-mr-sm'"
-              />
-            </q-virtual-scroll>
+<!--            <q-virtual-scroll-->
+<!--              :items="turkishAlphabet"-->
+<!--              virtual-scroll-horizontal-->
+<!--              v-slot="{ item, index }"-->
+<!--            >-->
+<!--              <q-btn-->
+<!--                :key="index"-->
+<!--                :label="item"-->
+<!--                unelevated-->
+<!--                size="md"-->
+<!--                @click="onSelectAlphabet(item)"-->
+<!--                :class="selectedAlphabet === item ? 'is-activeBtn q-mr-sm' : 'primaryBtn q-mr-sm'"-->
+<!--              />-->
+<!--            </q-virtual-scroll>-->
+            <q-btn
+              v-for="(item,index) in turkishAlphabet"
+              :key="index"
+              :label="item"
+              unelevated
+              size="lg"
+              @click="onSelectAlphabet(item)"
+              :class="selectedAlphabet === item ? 'is-activeBtn q-mr-sm q-mt-md' : 'primaryBtn q-mr-sm q-mt-md'"
+            />
           </q-card-section>
           <q-card-section>
             <q-scroll-area class="full-width  " style="height: calc(100vh - 30vh); width: 100%!important;">
               <div class="row">
                 <div class="col-4   q-pa-sm" v-for="(waiter,index) in filteredWaiters" :key="index">
                   <q-btn
+                    no-caps
                     :key="index"
                     @click="onSelectWaiter(waiter)"
-                    size="17px"
-                    :label="waiter?.name"
+                    size="20px"
+                    :label="textCapitalize(waiter?.name + ' ' + waiter?.surname)"
                     unelevated
                     class="primaryBtn full-width"
                   />

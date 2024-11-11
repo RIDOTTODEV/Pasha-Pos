@@ -21,26 +21,20 @@ onMounted(() => {
 <template>
   <q-page class="q-pa-md">
     <q-card flat class=" ">
-      <q-card-section>
-        <q-virtual-scroll
-          :items="getOrderSections"
-          virtual-scroll-horizontal
-          v-slot="{ item, index }"
-          type="list"
-          :items-size="getOrderSections.length"
-          class="q-pl-md"
-        >
+      <q-card-section class="">
+        <div class="flex justify-center">
           <q-btn
-            size="17px"
+            v-for="(item, index ) in getOrderSections"
+            size="20px"
             @click="onSelectSection(item)"
             :key="index"
-            :label="textCapitalize(item?.name)"
+            :label="item?.name"
             unelevated
             no-caps
-            :class="item?.id === selectedSection?.id  ? 'q-mr-sm is-activeBtn' : 'q-mr-md  '"
+            :class="item?.id === selectedSection?.id  ? 'q-mr-sm is-activeBtn q-mt-sm' : 'q-mr-md q-mt-sm '"
             color="blue-grey-8"
           />
-        </q-virtual-scroll>
+        </div>
         <div class="row q-mt-md">
           <q-scroll-area  style="height: calc(100vh - 20vh); width: 100%!important;"  >
             <div class="row">

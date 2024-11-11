@@ -4,6 +4,7 @@ import {storeToRefs} from "pinia";
 import {computed, defineAsyncComponent, inject, onMounted, ref, watch} from "vue";
 import {useQuasar,date} from "quasar";
 import {useRouter} from "vue-router";
+import {i18n} from "boot/i18n";
 
 
 export function useCatalog() {
@@ -57,10 +58,17 @@ export function useCatalog() {
   const selectedWaiter = ref(null)
   const selectedAlphabet = ref('')
   const filteredWaiters = computed(() => {
-    return waiters.value.filter(waiter => waiter.name.toLowerCase().includes(selectedAlphabet.value.toLowerCase()))
+    // filter waiters by name first charter waiter.name.toLowerCase().includes(selectedAlphabet.value.toLowerCase())
+
+    return waiters.value.filter(waiter => {
+      if (selectedAlphabet.value === '') {
+        return waiter
+      }
+      return waiter.name.toLowerCase().startsWith(selectedAlphabet.value)
+    })
   })
-  const turkishAlphabet =  'abcçdefgğhıijklmnoöprsştuüvyz'.split('').filter(item => {
-    if (waiters.value.find(waiter => waiter.name.toLowerCase().includes(item))) {
+  const turkishAlphabet =  'abcçdefgğhıijklmnoöprsştuüvyzw'.split('').filter(item => {
+    if (waiters.value.find(waiter => waiter.name.toLowerCase().startsWith(item))) {
       return item
     }
   })
@@ -343,6 +351,19 @@ export function useCatalog() {
     selectedTable.value = null
     await router.push({name: 'table'})
   }
+
+  const onClickNext = () => {
+    orderProcess.value = 'chooseWaiter'
+    if (orderProcess.value === 'chooseWaiter' && selectedWaiter.value === null) {
+      $q.notify({
+        message:i18n.global.t('base.pleaseSelectAWaiter'),
+        type:'warning',
+        position:'center',
+        timeout:1000
+      })
+    }
+
+  }
   return {
     terminalStore,
     orderStore,
@@ -383,6 +404,7 @@ export function useCatalog() {
     onSelectWaiter,
     increaseProduct,
     decreaseProduct,
-    onClickCancel
+    onClickCancel,
+    onClickNext
   }
 }

@@ -6,6 +6,8 @@ export default {
     dashboard: 'Dashboard',
   },
   base:{
+    orderedByName:'Siparişi Veren',
+    pleaseSelectAWaiter:'Lütfen bir garson seçiniz',
     newOrder: 'Yeni Sipariş',
     orders: 'Siparişler',
     home:'Ana Sayfa',
