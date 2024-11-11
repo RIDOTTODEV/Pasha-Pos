@@ -112,6 +112,7 @@ const {
                 <div class="text-h5 text-bold "> {{ $t('order.newTicket') }} </div>
               </div>
             </q-card-section>
+            <q-badge   floating :label="props.row?.orderedByFullName" color="dark" outline class="q-mt-sm q-mb-sm q-ml-sm q-mr-sm"/>
           </q-card>
 
         </div>
