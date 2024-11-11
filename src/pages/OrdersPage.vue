@@ -63,7 +63,7 @@ const {
 
           <q-card flat bordered square  class=" full-height flex " style="flex-direction: column;">
             <q-card-section class="q-pa-xs flex  justify-center">
-              <div class="text-subtitle1 text-left text-bold flex items-center q-ml-sm">
+              <div class="text-subtitle1 text-left text-bold flex items-center q-ml-sm q-mt-sm">
                 <q-icon name="point_of_sale" size="17px" class="q-mr-xs"/>
                 {{ props.row.tableName }}
               </div>
