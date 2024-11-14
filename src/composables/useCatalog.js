@@ -89,19 +89,19 @@ export function useCatalog() {
       categoryHistory.value.push(terminalMenu.value[0])
       if (terminalMenu.value[0].categories.length === 1) {
         categoryHistory.value.push(terminalMenu.value[0].categories[0])
-        categories.value = terminalMenu.value[0].categories[0].categories || terminalMenu.value[0].categories[0].subCategories || []
-        products.value = terminalMenu.value[0].categories[0].products || []
+        categories.value = terminalMenu.value[0].categories[0].categories?.sort((a, b) => a.categoryName.localeCompare(b.categoryName)) || terminalMenu.value[0].categories[0].subCategories?.sort((a, b) => a.categoryName.localeCompare(b.categoryName)) || []
+        products.value = terminalMenu.value[0].categories[0].products?.sort((a, b) => a.productName.localeCompare(b.productName)) || []
       } else {
-        categories.value = terminalMenu.value[0].categories || []
+        categories.value = terminalMenu.value[0].categories?.sort((a, b) => a.categoryName.localeCompare(b.categoryName)) || []
       }
     } else {
-      categories.value = terminalMenu.value
+      categories.value = terminalMenu.value?.sort((a, b) => a.menuName.localeCompare(b.menuName)) || []
     }
   }
   const onClickCategory = (category) => {
     categoryHistory.value.push(category)
-    categories.value = category.categories || category.subCategories || []
-    products.value = category.products || []
+    categories.value = category.categories?.sort((a, b) => a.categoryName.localeCompare(b.categoryName)) || category.subCategories?.sort((a, b) => a.categoryName.localeCompare(b.categoryName)) || []
+    products.value = category.products?.sort((a, b) => a.productName.localeCompare(b.productName)) || []
     fetchFavoriteProduct.value = false
   }
   const onClickBack = () => {

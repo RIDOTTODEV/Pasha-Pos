@@ -52,20 +52,20 @@ export const useOrderStore = defineStore('order', {
       const {getTerminalTags, getTerminalSections, getTerminalMenuIds} = terminalStore
       const themeStore = useThemeStore()
       const {settings} = themeStore
+
       order.products = order.products.filter(product =>
         getTerminalTags.includes(product.orderTagId)
         && getTerminalMenuIds.includes(product.menuId)
-      ).map(async product => {
-        if (settings.newOrder.ringTone) {
-          await playOneRingTone()
-        }
+      ).map(product => {
         return {
           ...product,
           status:'New'
         }
       })
       if (order.products.length > 0 && getTerminalSections.includes(order.sectionId)) {
-
+        if (settings.newOrder.ringTone) {
+            playOneRingTone().then()
+        }
         this.terminalOrders.unshift(order)
       }
     },
