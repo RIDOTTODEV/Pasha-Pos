@@ -70,7 +70,9 @@ export const useTerminalStore = defineStore('terminal', {
     getTerminalSections: (state) => {
       return [...state.terminal?.sections || []]
     },
-
+    getTerminalPassword: (state) => {
+      return state.terminal?.posLogOutPassword || '412199'
+    }
   },
 
   actions: {

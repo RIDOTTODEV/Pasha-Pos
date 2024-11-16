@@ -19,7 +19,7 @@ export function useLayout() {
   const themeStore = useThemeStore();
   const {getMenus, locales, currentGameDate, settings} = storeToRefs(themeStore)
   const terminalStore = useTerminalStore()
-  const {terminal} = storeToRefs(terminalStore)
+  const {terminal,getTerminalPassword} = storeToRefs(terminalStore)
   const searchInput = ref('')
   const searchResults = ref([])
   const showResults = ref(false)
@@ -59,10 +59,23 @@ export function useLayout() {
   }
 
   const onClickLogout = async () => {
-    LocalStorage.setItem('latestTerminalUid', terminal?.value?.uid)
-    LocalStorage.removeItem('terminal')
-    terminal.value = null
-    await router.push({name: 'login'})
+    $q.dialog({
+      component: defineAsyncComponent(() => import("../pages/components/LogOutPasswordDialog.vue")),
+    }).onOk(async (payload) => {
+      if (payload.password && payload?.password.toLowerCase() === getTerminalPassword.value.toString().toLowerCase()) {
+        LocalStorage.setItem('latestTerminalUid', terminal?.value?.uid)
+        LocalStorage.removeItem('terminal')
+        terminal.value = null
+        await router.push({name: 'login'})
+      } else {
+        $q.notify({
+          message: i18n.global.t('base.passwordIncorrect'),
+          color: 'negative',
+          position: 'bottom-right',
+          timeout: 2000,
+        })
+      }
+    })
   }
 
   const toggleDarkMode = () => {

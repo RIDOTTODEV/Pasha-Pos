@@ -6,6 +6,8 @@ export default {
     dashboard: 'Dashboard',
   },
   base:{
+    confirmPassword:'Şifreyi Onayla',
+    passwordIncorrect:'Şifre yanlış',
     orderedByName:'Siparişi Veren',
     pleaseSelectAWaiter:'Lütfen bir garson seçiniz',
     newOrder: 'Yeni Sipariş',

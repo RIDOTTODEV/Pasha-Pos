@@ -6,6 +6,8 @@ export default {
     dashboard: 'Dashboard',
   },
   base:{
+    confirmPassword:'Confirm Password',
+    passwordIncorrect:'Password is incorrect',
     orderedByName:'Ordered By Name',
     pleaseSelectAWaiter:'Please select a waiter',
     newOrder: 'New Order',
