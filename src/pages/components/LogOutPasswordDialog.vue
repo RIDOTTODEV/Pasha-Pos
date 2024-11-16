@@ -1,6 +1,6 @@
 <template>
   <q-dialog no-esc-dismiss persistent transition-duration="100" ref="dialogRef" @hide="onDialogHide" square style="z-index: 0!important;"  position="top" backdrop-filter="blur(4px) saturate(150%)" transition-show="slide-down" transition-hide="slide-up">
-    <q-card flat class="q-dialog-plugin bg-transparent" style="min-width: 700px;margin-top: 100px">
+    <q-card  square flat class="q-dialog-plugin bg-transparent" style="min-width: 700px;margin-top: 100px">
       <q-form @submit="onSubmit">
         <q-card-section class="q-pa-none">
           <KioskBoardInput
@@ -11,10 +11,12 @@
             v-model="formValues.password"
             :label="$t('base.note')"
             :rules="[val => !val  || $t('base.requiredField',{fieldName: $t('base.password')})]"
+
           />
         </q-card-section>
-        <q-card-actions class="q-pa-none">
-           <q-btn no-caps icon="save" size="lg" square class="full-width" color="blue-grey-8" unelevated :label="$t('base.confirmPassword')" type="submit"/>
+        <q-card-actions class="q-pa-none flex justify-end  q-mt-sm text-right">
+          <q-btn no-caps icon="cancel" size="lg" square  @click="onDialogCancel"  color="negative" unelevated :label="$t('base.cancel')" type="button"/>
+          <q-btn no-caps icon="save" size="lg" square   color="blue-grey-8" unelevated :label="$t('base.confirmPassword')" type="submit"/>
         </q-card-actions>
       </q-form>
     </q-card>
