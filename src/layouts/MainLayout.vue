@@ -13,7 +13,19 @@
   </q-layout>
 </template>
 <script setup>
+import {useTerminalStore} from "stores/terminal-store";
+const terminalStore = useTerminalStore();
+const {terminal} = storeToRefs(terminalStore);
 import {useLayout} from "src/composables/useLayout";
+import {storeToRefs} from "pinia";
+import {watch} from "vue";
 
 const {leftDrawerOpen, AppHeader} = useLayout()
+
+// watch the terminal value
+watch(terminal, (value) => {
+ if (!value?.id){
+  location.reload()
+ }
+})
 </script>

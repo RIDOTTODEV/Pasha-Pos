@@ -78,6 +78,7 @@ export function useLayout() {
     })
   }
 
+
   const toggleDarkMode = () => {
     const isActiveDarkModel = LocalStorage.getItem('darkMode')
     if (isActiveDarkModel) {
