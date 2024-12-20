@@ -3,14 +3,13 @@
     <q-card flat class="q-dialog-plugin bg-transparent" style="min-width: 700px;margin-top: 100px">
       <q-form @submit="onSubmit">
         <q-card-section class="q-pa-none">
-          <KioskBoardInput
-            square
-            @close-modal="onSubmit"
-            :autofocus="true"
-            :type="kioskBoardInputType"
+          <SimpleKeyboard
             v-model="formValues.note"
-            :label="$t('base.note')"
-            :rules="[val => !val  || $t('base.requiredField',{fieldName: $t('base.note')})]"
+            :placeholder="$t('base.note') + ' ...'"
+            @onKeyPress="args => { if(args === '{enter}') { onSubmit() } }"
+            type="textarea"
+            inputName="note"
+            :autofocus="true"
           />
         </q-card-section>
         <q-card-actions class="q-pa-none">

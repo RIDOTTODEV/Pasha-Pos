@@ -1,6 +1,5 @@
 <script setup>
 import ProgressBar from "components/common/ProgressBar.vue";
-import KioskBoardInput from "components/common/KioskBoardInput.vue";
 import Timer from "components/common/Timer.vue";
 import {useI18n} from "vue-i18n";
 const {locale} = useI18n({useScope: "global"});
@@ -16,6 +15,7 @@ const { locales, themeStore, router,searchInput,$q,terminal,showResults,searchRe
 const onTimeOut = () => {
   location.reload()
 }
+
 </script>
 
 <template>
@@ -41,15 +41,15 @@ const onTimeOut = () => {
           </div>
         </div>
         <div class="col-3 flex items-center">
-          <KioskBoardInput
-            prepend-icon="search"
-            :showPrepend="true"
-            :placeholder="$t('base.search') + '...'"
-            v-model="searchInput"
-            @close-modal="onSubmitSearch"
-            @clear-value="onClearSearchInput"
-
-          />
+          <SimpleKeyboard v-model="searchInput" :placeholder="$t('base.search') + ' ...'" @onKeyPress="args => {
+            if(args === '{enter}') {
+             onSubmitSearch()
+            }
+          }" :slot-names="['append']"  >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </SimpleKeyboard>
           <q-popup-proxy  style="width: 430px"  context-menu v-model="showResults"  transition-show="flip-up" transition-hide="flip-down"  >
             <q-list bordered separator>
               <q-item dense class="row" clickable v-ripple v-for="(result,index) in searchResults" :key="index">

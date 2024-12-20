@@ -1,6 +1,5 @@
 <script setup>
 import {useOrder} from "src/composables/useOrder";
-import KioskBoardInput from "components/common/KioskBoardInput.vue";
 import {textCapitalize} from "../utils/helpers";
 
 const {
@@ -27,7 +26,6 @@ const {
       row-key="id"
       :filter="orderFilterInput"
       hide-header
-      :rows-per-page-options="[0]"
       :filter-method="filterTerminalOrder"
       hide-pagination
       hide-bottom
@@ -37,23 +35,25 @@ const {
     >
       <template v-slot:top>
         <div class="row full-width">
-          <div class="col-4 flex content-end">
+          <div class="col-6 flex content-end">
             <div class="text-h6 text-bold">
               {{ $t('order.orders') }} ({{ getTerminalOrders().length }})
             </div>
           </div>
-          <div class="col-8 row  flex justify-end  ">
+          <div class="col-6 row  flex justify-end  ">
             <q-btn icon="o_cancel" unelevated color="green-9" no-caps :label="$t('order.clearAllTickets')" @click="completeOrders" class="  "/>
             <q-btn icon="add" unelevated no-caps :label="$t('order.createNewOrder')" @click="router.push({name:'table'})" class=" q-ml-md is-activeBtn"/>
-            <KioskBoardInput
-              styleClass=""
-              show-prepend
-              :placeholder="$t('base.search')"
+            <SimpleKeyboard
               v-model="orderFilterInput"
-              class="q-ml-md bg-white"
-              @clearValue="orderFilterInput = ''"
-
-            />
+              :placeholder="$t('base.search') + ' ...'"
+              inputName="password"
+              :slot-names="['append']"
+              inputClass=" q-ml-sm"
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </SimpleKeyboard>
             <q-btn   color="dark" icon="history" unelevated no-caps :label="$t('order.orderHistory')" @click="onClickOrderHistory" class="q-ml-md"/>
           </div>
         </div>

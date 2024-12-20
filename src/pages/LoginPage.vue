@@ -1,6 +1,5 @@
 <script setup>
 import {useAuth} from "src/composables/useAuth";
-import KioskBoardInput from "components/common/KioskBoardInput.vue";
 const {formValues,terminals, showTerminals, signInByUUid} = useAuth()
 
 </script>
@@ -35,18 +34,23 @@ const {formValues,terminals, showTerminals, signInByUUid} = useAuth()
               class="q-mb-md"
               color="secondary"
               v-if="showTerminals"
+
               />
             <div class="col-12">
               <div class="text-subtitle2 text-bold q-mb-xs" @click="showTerminals = !showTerminals">
                 {{$t('base.pleaseEnterUuid')}}
                 <span class="text-negative">*</span>
               </div>
-              <KioskBoardInput
+
+              <SimpleKeyboard
                 v-model="formValues.uid"
-                :placeholder="$t('base.uuid')"
-                @clearValue="formValues.uid = ''"
-                @close-modal="signInByUUid"
-              />
+                :placeholder="'UUID ...'"
+                inputName="password"
+                :slot-names="['append']"  >
+                <template v-slot:append>
+                  <q-icon name="password" />
+                </template>
+              </SimpleKeyboard>
             </div>
             <div class="col-12">
               <q-btn unelevated  :label="$t('base.login')" class="q-mt-md full-width  " color="secondary"  type="submit" />

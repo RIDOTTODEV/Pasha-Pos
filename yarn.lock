@@ -3174,10 +3174,15 @@ signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
-simple-keyboard@^3.8.5:
-  version "3.8.5"
-  resolved "https://registry.yarnpkg.com/simple-keyboard/-/simple-keyboard-3.8.5.tgz#6255b7a29a41cd357d90403bc6cc25940a46df89"
-  integrity sha512-36QkQx8ABR1QLNLdhEEHmKXlM5TGwXUfmmMxHdCeFxZzEb7rP/7sVFg3QKp+SX5PUG7xvvPGqTHWG0VgPdM+rw==
+simple-keyboard-layouts@^3.4.48:
+  version "3.4.48"
+  resolved "https://registry.yarnpkg.com/simple-keyboard-layouts/-/simple-keyboard-layouts-3.4.48.tgz#e545d9261ecef4201d3c73dfbc8f4514ae693197"
+  integrity sha512-0TRGz7Iv3CB15eb0AyS/BJBJXfBDLustaNwBdWGk5DxwG1SIG3PzvASuD3gDxpkdGYLLfom9B/Qsqmsu3YG5oA==
+
+simple-keyboard@^3.8.17:
+  version "3.8.17"
+  resolved "https://registry.yarnpkg.com/simple-keyboard/-/simple-keyboard-3.8.17.tgz#85bda87db2777c138b9d6e002a2de29f72b856d0"
+  integrity sha512-bAXBUv4E0skIQMVkUPMgDUEkusg8XqZuWRHL3sacTDsZWsUYQIgqv92rQw9tDjOKum2Kga9mR1sxlR7AjvjwUw==
 
 slice-ansi@^4.0.0:
   version "4.0.0"

@@ -29,7 +29,7 @@ export function useOrder() {
   })
   const pagination = ref({
     page: 1,
-    rowsPerPage: 100,
+    rowsPerPage: 50,
   })
   const orderFilterInput = ref('')
 

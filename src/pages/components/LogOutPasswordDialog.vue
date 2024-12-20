@@ -3,16 +3,16 @@
     <q-card  square flat class="q-dialog-plugin bg-transparent" style="min-width: 700px;margin-top: 100px">
       <q-form @submit="onSubmit">
         <q-card-section class="q-pa-none">
-          <KioskBoardInput
-            square
-            @close-modal="onSubmit"
-            :autofocus="true"
-            :type="kioskBoardInputType"
+          <SimpleKeyboard
             v-model="formValues.password"
-            :label="$t('base.note')"
-            :rules="[val => !val  || $t('base.requiredField',{fieldName: $t('base.password')})]"
-
-          />
+            :placeholder="$t('base.password') + ' ...'"
+            @onKeyPress="args => { if(args === '{enter}') { onSubmit() } }"
+            inputName="password"
+            :slot-names="['append']"  >
+            <template v-slot:append>
+              <q-icon name="password" />
+            </template>
+          </SimpleKeyboard>
         </q-card-section>
         <q-card-actions class="q-pa-none flex justify-end  q-mt-sm text-right">
           <q-btn no-caps icon="cancel" size="lg" square  @click="onDialogCancel"  color="negative" unelevated :label="$t('base.cancel')" type="button"/>
@@ -26,7 +26,6 @@
 <script setup>
 import {useDialogPluginComponent} from 'quasar'
 import {ref} from "vue";
-
 const props = defineProps({
   kioskBoardInputType: {
     type: String,

@@ -93,10 +93,12 @@ export function useLayout() {
 
   const onSubmitSearch = async () => {
     if (currentRouteName.value === 'home') {
+      if (!searchInput.value) {
+        return
+      }
       await searchCurrentTable().then(res => {
         if (res.data) {
           searchResults.value = res.data
-
           showResults.value = true
         }
       })
@@ -105,6 +107,7 @@ export function useLayout() {
     }
   }
   const searchCurrentTable = async () => {
+
     return await terminalStore.getCurrentTable(searchInput.value)
   }
 

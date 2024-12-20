@@ -1,7 +1,6 @@
 <script setup>
 import {getNameOfObject, textCapitalize} from "src/utils/helpers";
 import {useCatalog} from "src/composables/useCatalog";
-import KioskBoardInput from "components/common/KioskBoardInput.vue";
 import {computed, onUnmounted} from "vue";
 import {date} from "quasar";
 
@@ -267,17 +266,18 @@ const maxHeight = computed(() => {
       <div v-if="orderProcess === 'product'" class="col-5 q-pa-xs">
         <q-card flat square style="height: calc(100vh - 10vh)">
           <q-card-section>
-            <KioskBoardInput
+            <SimpleKeyboard
               v-model="searchProductInput"
-              @update:modelValue="filterProducts"
               :debounce="1000"
-              :placeholder="$t('base.searchProduct')"
-              :show-prepend="true"
-              @clearValue="() => {
-                searchProductInput = ''
-                filterProducts()
-              }"
-            />
+              :placeholder="$t('base.search') + ' ...'"
+              @onKeyPress="args => { if(args === '{enter}') { filterProducts() } }"
+              :slot-names="['append']"
+
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </SimpleKeyboard>
           </q-card-section>
           <q-card-section class="row q-pt-none">
             <q-scroll-area style="height: 500px; width: 100%!important;">

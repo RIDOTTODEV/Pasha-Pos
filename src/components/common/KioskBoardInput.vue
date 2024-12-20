@@ -79,8 +79,8 @@ const kioskBoardOption = {
   // keysIconSize: '15px',
   keysAllowSpacebar: true,
   keysEnterCanClose: true,
-  // allowRealKeyboard: true,
-  // allowMobileKeyboard: true,
+  allowRealKeyboard: true,
+  allowMobileKeyboard: true,
   theme: initialTheme.value,
 
   keysArrayOfObjects: [
