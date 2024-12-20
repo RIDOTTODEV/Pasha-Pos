@@ -258,4 +258,7 @@ onMounted(() => {
   background: #b0bec5!important;
   color: black!important;
 }
+.hg-button {
+  height: 60px!important;
+}
 </style>
