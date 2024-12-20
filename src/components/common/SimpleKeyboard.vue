@@ -260,5 +260,10 @@ onMounted(() => {
 }
 .hg-button {
   height: 60px!important;
+  font-weight: 700 !important;
+}
+.hg-theme-default .hg-button span {
+  font-size: 20px!important;
+  font-weight: 700!important;
 }
 </style>
