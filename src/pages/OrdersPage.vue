@@ -35,18 +35,18 @@ const {
     >
       <template v-slot:top>
         <div class="row full-width">
-          <div class="col-6 flex content-end">
+          <div class="col-4 flex content-end">
             <div class="text-h6 text-bold">
               {{ $t('order.orders') }} ({{ getTerminalOrders().length }})
             </div>
           </div>
-          <div class="col-6 row  flex justify-end  ">
+          <div class="col-8 row  flex justify-end  ">
             <q-btn icon="o_cancel" unelevated color="green-9" no-caps :label="$t('order.clearAllTickets')" @click="completeOrders" class="  "/>
             <q-btn icon="add" unelevated no-caps :label="$t('order.createNewOrder')" @click="router.push({name:'table'})" class=" q-ml-md is-activeBtn"/>
             <SimpleKeyboard
               v-model="orderFilterInput"
               :placeholder="$t('base.search') + ' ...'"
-              inputName="password"
+              inputName="ordersSearch"
               :slot-names="['append']"
               inputClass=" q-ml-sm"
             >

@@ -93,6 +93,8 @@ export const useTerminalStore = defineStore('terminal', {
         })
       }).catch(err => {
         fireNotify(i18n.global.t('base.errorOccurred', {message: err.message}), 'failed', null, 1500, 'negative')
+        LocalStorage.removeItem('terminal')
+        LocalStorage.removeItem('latestTerminalUid')
       })
     },
     async fetchTerminalMenu() {

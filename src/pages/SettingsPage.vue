@@ -121,7 +121,13 @@ const {
                           <div class="text-subtitle2 flex items-center"  >
                             {{$t('base.password')}}
                           </div>
-                          <q-input class="super-small" v-model="terminal.password"  :type="isPwd ? 'password':'text'" outlined dense>
+                          <SimpleKeyboard
+                            v-model="terminal.password"
+                            :placeholder="$t('base.password') + ' ...'"
+                            inputName="password"
+                            :slot-names="['append']"
+                            :type="isPwd ? 'password':'text'"
+                          >
                             <template v-slot:append>
                               <q-icon
                                 :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -129,7 +135,7 @@ const {
                                 @click="isPwd = !isPwd"
                               />
                             </template>
-                          </q-input>
+                          </SimpleKeyboard>
                         </div>
                         <div class="col-6 text-right">
                           <q-btn :label="$t('base.save')" icon="save" color="blue-grey-8" unelevated type="submit" class=" "/>
