@@ -272,7 +272,7 @@ const maxHeight = computed(() => {
               :placeholder="$t('base.search') + ' ...'"
               @onKeyPress="args => { if(args === '{enter}') { filterProducts() } }"
               :slot-names="['append']"
-
+              input-name="searchProductInput"
             >
               <template v-slot:append>
                 <q-icon name="search" />

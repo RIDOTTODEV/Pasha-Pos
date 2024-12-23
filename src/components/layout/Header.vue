@@ -45,7 +45,7 @@ const onTimeOut = () => {
             if(args === '{enter}') {
              onSubmitSearch()
             }
-          }" :slot-names="['append']"  >
+          }" :slot-names="['append']"  input-name="searchBarInput" >
             <template v-slot:append>
               <q-icon name="search" />
             </template>
