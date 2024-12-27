@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia'
-import {api,axios} from "boot/axios";
+import {api, axios, searchPlayerApi} from "boot/axios";
 import {fireNotify} from "src/utils/notifications";
 import {i18n} from "boot/i18n";
 import {Loading, LocalStorage} from "quasar";
@@ -198,6 +198,13 @@ export const useTerminalStore = defineStore('terminal', {
         this.terminals = res.data.data
       }).catch(err => {
         fireNotify(i18n.global.t('base.errorOccurred', {message: err.message}), 'failed', null, 1500, 'negative')
+      })
+    },
+    async searchPlayer(params) {
+      return await searchPlayerApi.get('/Player/Search', {params}).then((response) => {
+        return response.data
+      }).catch(er => {
+        fireNotify(i18n.global.t('base.failed', {name: i18n.global.t('base.player')}), 'failed', null, 5000, 'negative')
       })
     }
   }

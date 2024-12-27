@@ -21,6 +21,8 @@ export const useAuthStore = defineStore('auth', {
       }).catch(er => {
         fireNotify(i18n.global.t('base.failed', {name: i18n.global.t('base.terminalDetails')}), 'failed', null, 5000, 'negative')
       })
-    }
+    },
+
   },
+
 });

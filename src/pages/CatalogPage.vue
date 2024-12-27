@@ -38,7 +38,8 @@ const {
   increaseProduct,
   decreaseProduct,
   onClickCancel,
-  onClickNext
+  onClickNext,
+  onClickSearchPlayer
 } = useCatalog();
 const maxHeight = computed(() => {
   return orderPlayer?.orders?.length > 0 ? '40%' : '70%'
@@ -103,15 +104,13 @@ const maxHeight = computed(() => {
             <q-card-section class="product_list q-pa-none" style="">
               <q-item clickable v-ripple class="col-12 q-mt-xs q-pt-none q-pb-none q-pr-sm q-pl-sm bg-red-1" dense>
                 <q-item-section >
-                  <q-item-label class="text-dark">
+                  <q-item-label class="text-dark text-bold">
                     {{ $t('base.newOrderList') }}
                   </q-item-label>
                 </q-item-section>
                 <q-item-section side>
                   <div class="row flex text-subtitle2 text-dark">
-                    <q-icon name="o_loyalty" size="20px" class="q-mr-sm"/>
-                    <span class="q-mr-xs">{{ $t('order.orderHistory') }}</span> (<span
-                    class="text-bold">{{ order.products.length }}</span>)
+                    <q-btn icon="add" outline flat :label="$t('base.addPlayer')" @click="onClickSearchPlayer" :disable="!!orderPlayer?.playerId && !orderPlayer?.newPlayer"   />
                   </div>
                 </q-item-section>
               </q-item>

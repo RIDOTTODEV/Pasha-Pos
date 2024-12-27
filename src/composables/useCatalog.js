@@ -364,6 +364,49 @@ export function useCatalog() {
     }
 
   }
+
+  const onClickSearchPlayer = () => {
+    $q.dialog({
+      component: defineAsyncComponent(() => import("/src/pages/components/SearchPlayerDialog.vue")),
+      componentProps:{
+        searchFn: terminalStore.searchPlayer,
+      }
+    }).onOk(async (player) => {
+
+      let splitName = player.fullName.split(' ')
+      let playerFormatted = {
+        playerId:player.id,
+        externalId:player.assistId,
+        playerClass:null,
+        name:splitName[0],
+        surname:splitName[1],
+        playerFullName:player.fullName,
+      }
+
+      order.value.playerId = player.id || null
+      order.value.externalId = player?.assistId || null
+      order.value.playerClass = null
+      order.value.playerFullName = player.fullName  || null
+      order.value.playerName =  player.fullName || null
+      orderPlayer.value = playerFormatted
+      orderPlayer.value.newPlayer = true
+
+      if (player.assistId && player.assistId > 0) {
+        let d = date.subtractFromDate(new Date(), {days: getTerminal.value('playerLastOrderDay') || 10})
+        let params = {
+          startDate:date.formatDate(d, 'YYYY-MM-DDTHH:mm:ss'),
+          endDate: null,
+          ExternalId: player.assistId,
+          Take: getTerminal.value('playersLastOrderCount') || 5,
+          Skip: 0,
+          QueryType: 'byTime'
+        }
+        const playerOrders = await orderStore.getPlayerOrders(params).then(res => res.data) || null
+        orderPlayer.value.orders= playerOrders.data
+      }
+
+    })
+  }
   return {
     terminalStore,
     orderStore,
@@ -405,6 +448,7 @@ export function useCatalog() {
     increaseProduct,
     decreaseProduct,
     onClickCancel,
-    onClickNext
+    onClickNext,
+    onClickSearchPlayer
   }
 }
