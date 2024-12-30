@@ -15,7 +15,6 @@ const { locales, themeStore, router,searchInput,$q,terminal,showResults,searchRe
 const onTimeOut = () => {
   location.reload()
 }
-
 </script>
 
 <template>
@@ -41,16 +40,19 @@ const onTimeOut = () => {
           </div>
         </div>
         <div class="col-3 flex items-center">
-          <SimpleKeyboard v-model="searchInput" :placeholder="$t('base.search') + ' ...'" @onKeyPress="args => {
-            if(args === '{enter}') {
-             onSubmitSearch()
-            }
-          }" :slot-names="['append']"  input-name="searchBarInput" >
+          <SimpleKeyboard
+            v-model="searchInput"
+            :placeholder="$t('base.search') + ' ...'"
+            @onKeyPress="args => { if(args === '{enter}') { onSubmitSearch() } }"
+            :slot-names="['append']"
+            input-name="searchBarInput"
+            :debounce="1000"
+          >
             <template v-slot:append>
               <q-icon name="search" />
             </template>
           </SimpleKeyboard>
-          <q-popup-proxy  style="width: 430px"  context-menu v-model="showResults"  transition-show="flip-up" transition-hide="flip-down"  >
+          <q-popup-proxy  style="width: 370px"  context-menu v-model="showResults"  transition-show="flip-up" transition-hide="flip-down"  >
             <q-list bordered separator>
               <q-item dense class="row" clickable v-ripple v-for="(result,index) in searchResults" :key="index">
                 <q-item-section class="col-12 text-center">

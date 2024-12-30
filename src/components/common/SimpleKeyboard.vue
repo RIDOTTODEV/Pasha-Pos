@@ -82,10 +82,10 @@ const props = defineProps({
     type: Boolean,
     default: () => false,
   },
-  inputClass:{
+  inputClass: {
     type: String,
     default: () => 'full-width',
-    required:false
+    required: false
   }
 });
 const input = ref(props.modelValue);
@@ -100,7 +100,13 @@ const setupKeyBoard = () => {
   if (keyboardVisible.value && !keyboard.value) {
     keyboard.value = new SimpleKeyboard({
       onChange,
-      onKeyPress,
+      onKeyPress: button => {
+        if (button === '{enter}') {
+          onKeyPress('{Enter}');
+        } else {
+          onKeyPress(button);
+        }
+      },
       inputName: props.inputName,
       theme: 'hg-theme-default',
       physicalKeyboardHighlight: true,
@@ -123,7 +129,7 @@ const setupKeyBoard = () => {
           class: "grayBtn",
           buttons: "{space} {shift} {bksp}"
         }
-        ]
+      ],
     });
 
     keyboard.value.setInput(input.value);
@@ -144,17 +150,21 @@ const onChange = (text) => {
 };
 
 const onHandleDebounce = debounce(() => {
-  onKeyPress('{enter}');
+  if (keyboardVisible.value) {
+    onKeyPress('{enter}');
+  }
 }, props.debounce);
 
 const onKeyPress = (button) => {
-  //emits('onKeyPress', button);
   if (button === '{shift}' || button === '{lock}') {
     handleShift();
   }
-  if (button === '{enter}') {
+  if (button === '{Enter}') {
     keyboard.value?.destroy();
     keyboardVisible.value = false;
+  }
+  if (button === '{enter}'){
+    emits('onKeyPress', button);
   }
 };
 
@@ -202,11 +212,13 @@ watch(() => props.modelValue, (value) => {
     keyboard.value.setInput(value);
   }
 });
+
+
 onMounted(() => {
   if (props.autofocus) {
     setTimeout(() => {
       keyboardVisible.value = true;
-    },100)
+    }, 100)
   }
   // Handle backspace key
   window.addEventListener('keydown', (e) => {
@@ -250,20 +262,23 @@ onMounted(() => {
 }
 
 .enterBtn {
-  background: #ff3568!important;
-  color: white!important;
+  background: #ff3568 !important;
+  color: white !important;
 
 }
+
 .grayBtn {
-  background: #b0bec5!important;
-  color: black!important;
+  background: #b0bec5 !important;
+  color: black !important;
 }
+
 .hg-button {
-  height: 60px!important;
+  height: 60px !important;
   font-weight: 700 !important;
 }
+
 .hg-theme-default .hg-button span {
-  font-size: 20px!important;
-  font-weight: 550!important;
+  font-size: 20px !important;
+  font-weight: 550 !important;
 }
 </style>
