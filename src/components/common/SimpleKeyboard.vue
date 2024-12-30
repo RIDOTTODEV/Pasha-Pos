@@ -100,13 +100,14 @@ const setupKeyBoard = () => {
   if (keyboardVisible.value && !keyboard.value) {
     keyboard.value = new SimpleKeyboard({
       onChange,
-      onKeyPress: button => {
-        if (button === '{enter}') {
-          onKeyPress('{Enter}');
-        } else {
-          onKeyPress(button);
-        }
-      },
+      onKeyPress,
+      //   : button => {
+      //   if (button === '{enter}') {
+      //     onKeyPress('{Enter}');
+      //   } else {
+      //     onKeyPress(button);
+      //   }
+      // },
       inputName: props.inputName,
       theme: 'hg-theme-default',
       physicalKeyboardHighlight: true,
@@ -159,13 +160,13 @@ const onKeyPress = (button) => {
   if (button === '{shift}' || button === '{lock}') {
     handleShift();
   }
-  if (button === '{Enter}') {
+  if (button === '{enter}') {
     keyboard.value?.destroy();
     keyboardVisible.value = false;
   }
-  if (button === '{enter}'){
-    emits('onKeyPress', button);
-  }
+  // if (button === '{enter}'){
+  //   emits('onKeyPress', button);
+  // }
 };
 
 const handleShift = () => {
