@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import {ref, watchEffect, nextTick, watch, onMounted, onBeforeUnmount} from 'vue';
+import {ref, watchEffect, nextTick, onMounted, onBeforeUnmount} from 'vue';
 import SimpleKeyboard from 'simple-keyboard';
 import 'simple-keyboard/build/css/index.css';
 import {debounce} from "quasar";
@@ -222,18 +222,6 @@ const handleClickOutside = (event) => {
      }
    }
 };
-watch(() => props.inputName, (inputName) => {
-  if (keyboard.value) {
-    keyboard.value.setOptions({inputName});
-  }
-});
-
-watch(() => props.modelValue, (value) => {
-  input.value = value;
-  if (keyboard.value) {
-    keyboard.value.setInput(value);
-  }
-});
 
 onMounted(() => {
   document.addEventListener("mousedown", handleClickOutside);
