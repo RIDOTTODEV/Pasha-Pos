@@ -4,8 +4,6 @@
     :for="inputName"
     dense
     outlined
-    @clear="onClearInput"
-    clearable
     :placeholder="placeholder"
     :type="type"
     :class="inputClass"
@@ -86,7 +84,7 @@ const isKeyboardUsing = ref(false);
 const keyboard = ref(null);
 
 const onFocusInput = () => {
-  onFocusOutInput();
+  // onFocusOutInput();
   keyboardVisible.value = true;
   nextTick(() => {
     setupKeyBoard();
@@ -115,6 +113,7 @@ const setupKeyBoard = () => {
       theme: 'hg-theme-default',
       physicalKeyboardHighlight: true,
       physicalKeyboardHighlightPress: false,
+      autoUseTouchEvents: true,
       display: {
         '{bksp}': '←',
         '{tab}': 'Tab ⇄',
@@ -127,11 +126,15 @@ const setupKeyBoard = () => {
       buttonTheme: [
         {
           class: "enterBtn",
-          buttons: "{enter} {space} {shift} {lock} {tab} {bksp} {close}"
+          buttons: "{enter} {space} {shift} {lock} {tab} {bksp}"
         },
         {
           class: "grayBtn",
           buttons: "{space} {shift} {bksp}"
+        },
+        {
+          class: "warnBtn",
+          buttons: "{close}"
         }
       ],
       layout: {
@@ -139,15 +142,15 @@ const setupKeyBoard = () => {
           '" 1 2 3 4 5 6 7 8 9 0 * - # {bksp}',
           "{tab} q w e r t y u ı o p ğ ü [ ]",
           "{lock} a s d f g h j k l ş i , {enter}",
-          "{shift} < z x c v b n m ö ç . | $ € {shift}",
-          ".com @ {space} {close}",
+          "{shift} < z x c v b n m ö ç . | $ € {close}",
+          ".com @ {space}",
         ],
         shift: [
           "é ! ' ^ + % & / ( ) = ? _ ~ {bksp}",
           "{tab} Q W E R T Y U I O P Ğ Ü { }",
           "{lock} A S D F G H J K L Ş İ ; {enter}",
-          "{shift} > Z X C V B N M Ö Ç : \\ ` ´ {shift}",
-          ".com @ {space} {close}",
+          "{shift} > Z X C V B N M Ö Ç : \\ ` ´ {close}",
+          ".com @ {space}",
         ],
       },
     });
@@ -164,7 +167,7 @@ const setupKeyBoard = () => {
 
 const onChange = (text) => {
   input.value = text;
-  emits('update:modelValue', text);
+  // emits('update:modelValue', text);
   if (props.debounce > 300) {
     onHandleDebounce();
   }
@@ -177,6 +180,7 @@ const onHandleDebounce = debounce(() => {
 }, props.debounce);
 
 const onKeyPress = (button) => {
+
   isKeyboardUsing.value = true;
   if (button === '{shift}' || button === '{lock}') {
     handleShift();
@@ -186,6 +190,11 @@ const onKeyPress = (button) => {
   }
   if (button === '{close}') {
     onFocusOutInput();
+  }
+  if (button === '{bksp}') {
+    input.value = input.value?.slice(0, -1);
+    // emits('update:modelValue', input.value);
+    keyboard.value.setInput(input.value);
   }
 };
 
@@ -197,53 +206,37 @@ const handleShift = () => {
   }
 };
 
-const onClearInput = () => {
-  input.value = '';
-  emits('update:modelValue', '');
-  emits('onKeyPress', '{enter}');
-  if (keyboard.value) {
-    onFocusOutInput();
-  }
-}
-
 const handleClickOutside = (event) => {
-   if (keyboardVisible.value) {
-     const inputElement = document.querySelector(
-       `input[id="${props.inputName}"]`
-     );
-     const keyboardElement = document.getElementById('keyboardCard');
-      if (
-       !inputElement?.contains(event.target) &&
-       !keyboardElement?.contains(event.target) &&
-       keyboardVisible.value && props.type !== 'textarea'
-     ) {
-        onFocusOutInput();
-       isKeyboardUsing.value = false;
-     }
-   }
+  if (keyboardVisible.value) {
+    const inputElement = document.querySelector(
+      `input[id="${props.inputName}"]`
+    );
+    const keyboardElement = document.getElementById('keyboardCard');
+    if (
+      !inputElement?.contains(event.target) &&
+      !keyboardElement?.contains(event.target) &&
+      keyboardVisible.value && props.type !== 'textarea'
+    ) {
+      onFocusOutInput();
+      isKeyboardUsing.value = false;
+    }
+  }
 };
 
 onMounted(() => {
   document.addEventListener("mousedown", handleClickOutside);
 
   window.addEventListener('keydown', (e) => {
-    if (document.activeElement === document.querySelector(`input[for="${props.inputName}"]`)) {
-      if (e.key === 'Enter') {
-        onKeyPress('{enter}');
-      }
-      if (e.key.length === 1) {
-        if (keyboard.value && props.debounce > 300) {
-          onHandleDebounce();
-        }
-      }
-      if (e.key === 'Backspace') {
-        if (keyboard.value) {
-          if (props.debounce > 300) {
-            onHandleDebounce();
-          }
-        }
+    if (e.key === 'Enter') {
+      onKeyPress('{enter}');
+    }
+
+    if (e.key === 'Backspace') {
+      if (props.debounce > 300) {
+        onHandleDebounce();
       }
     }
+
   });
 })
 onBeforeUnmount(() => {
@@ -268,6 +261,11 @@ router.afterEach(() => {
 
 .grayBtn {
   background: #b0bec5 !important;
+  color: black !important;
+}
+
+.warnBtn {
+  background: #dac548 !important;
   color: black !important;
 }
 
