@@ -3,7 +3,7 @@
     <q-card flat class="q-dialog-plugin bg-transparent" style="min-width: 700px;margin-top: 100px">
       <q-form @submit="onSubmit">
         <q-card-section class="q-pa-none">
-          <SimpleKeyboard
+          <SimpleKeyboardNew
             v-model="formValues.note"
             :placeholder="$t('base.note') + ' ...'"
             @onKeyPress="args => { if(args === '{enter}') { onSubmit() } }"

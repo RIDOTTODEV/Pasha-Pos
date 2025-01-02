@@ -42,15 +42,17 @@ const {formValues,terminals, showTerminals, signInByUUid} = useAuth()
                 <span class="text-negative">*</span>
               </div>
 
-              <SimpleKeyboard
+              <SimpleKeyboardNew
                 v-model="formValues.uid"
                 :placeholder="'UUID ...'"
                 inputName="password"
-                :slot-names="['append']"  >
+                :slot-names="['append']"
+                @onKeyPress="args => { if(args === '{enter}') { signInByUUid() } }"
+              >
                 <template v-slot:append>
                   <q-icon name="password" />
                 </template>
-              </SimpleKeyboard>
+              </SimpleKeyboardNew>
             </div>
             <div class="col-12">
               <q-btn unelevated  :label="$t('base.login')" class="q-mt-md full-width  " color="secondary"  type="submit" />
@@ -59,8 +61,8 @@ const {formValues,terminals, showTerminals, signInByUUid} = useAuth()
         </q-card-section>
       </q-card>
     </div>
-
   </q-page>
+
 </template>
 
 <style scoped>

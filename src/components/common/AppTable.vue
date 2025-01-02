@@ -379,7 +379,7 @@ const statusColors = [
 <!--                </template>-->
 <!--              </q-input>-->
 
-              <SimpleKeyboard
+              <SimpleKeyboardNew
                 v-model="filterInput"
                 :placeholder="$t('base.search') + ' ...'"
                 inputName="ordersSearch"
@@ -394,7 +394,7 @@ const statusColors = [
                          @click="createButton.fn" no-caps
                          icon="add" class=" q-pr-sm" dense/>
                 </template>
-              </SimpleKeyboard>
+              </SimpleKeyboardNew>
 
 
               <date-time-picker v-if="useDateTimeFilter" @selected-date="val => {

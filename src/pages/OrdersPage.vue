@@ -43,7 +43,7 @@ const {
           <div class="col-8 row  flex justify-end  ">
             <q-btn icon="o_cancel" unelevated color="green-9" no-caps :label="$t('order.clearAllTickets')" @click="completeOrders" class="  "/>
             <q-btn icon="add" unelevated no-caps :label="$t('order.createNewOrder')" @click="router.push({name:'table'})" class=" q-ml-md is-activeBtn"/>
-            <SimpleKeyboard
+            <SimpleKeyboardNew
               v-model="orderFilterInput"
               :placeholder="$t('base.search') + ' ...'"
               inputName="ordersSearch"
@@ -53,7 +53,7 @@ const {
               <template v-slot:append>
                 <q-icon name="search" />
               </template>
-            </SimpleKeyboard>
+            </SimpleKeyboardNew>
             <q-btn   color="dark" icon="history" unelevated no-caps :label="$t('order.orderHistory')" @click="onClickOrderHistory" class="q-ml-md"/>
           </div>
         </div>

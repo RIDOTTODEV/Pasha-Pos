@@ -3,7 +3,7 @@
     <q-card flat class="q-dialog-plugin bg-transparent" style="min-width: 700px;margin-top: 100px">
       <div>
         <q-card-section class="q-pa-none">
-          <SimpleKeyboard
+          <SimpleKeyboardNew
             v-model="formValues.searchString"
             :debounce="1000"
             :placeholder="$t('base.search') + ' ...'"
@@ -14,7 +14,7 @@
             <template v-slot:append>
               <q-icon name="search" />
             </template>
-          </SimpleKeyboard>
+          </SimpleKeyboardNew>
         </q-card-section>
         <q-card-section v-if="searchedPlayers.length" class="bg-white">
           <q-list dense  separator padding class="rounded-borders q-pt-sm">

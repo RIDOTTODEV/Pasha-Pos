@@ -40,7 +40,7 @@ const onTimeOut = () => {
           </div>
         </div>
         <div class="col-3 flex items-center">
-          <SimpleKeyboard
+          <SimpleKeyboardNew
             v-model="searchInput"
             :placeholder="$t('base.search') + ' ...'"
             @onKeyPress="args => { if(args === '{enter}') { onSubmitSearch() } }"
@@ -51,7 +51,7 @@ const onTimeOut = () => {
             <template v-slot:append>
               <q-icon name="search" />
             </template>
-          </SimpleKeyboard>
+          </SimpleKeyboardNew>
           <q-popup-proxy  style="width: 370px"  context-menu v-model="showResults"  transition-show="flip-up" transition-hide="flip-down"  >
             <q-list bordered separator>
               <q-item dense class="row" clickable v-ripple v-for="(result,index) in searchResults" :key="index">

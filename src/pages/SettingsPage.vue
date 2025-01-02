@@ -121,7 +121,7 @@ const {
                           <div class="text-subtitle2 flex items-center"  >
                             {{$t('base.password')}}
                           </div>
-                          <SimpleKeyboard
+                          <SimpleKeyboardNew
                             v-model="terminal.password"
                             :placeholder="$t('base.password') + ' ...'"
                             inputName="password"
@@ -135,7 +135,7 @@ const {
                                 @click="isPwd = !isPwd"
                               />
                             </template>
-                          </SimpleKeyboard>
+                          </SimpleKeyboardNew>
                         </div>
                         <div class="col-6 text-right">
                           <q-btn :label="$t('base.save')" icon="save" color="blue-grey-8" unelevated type="submit" class=" "/>

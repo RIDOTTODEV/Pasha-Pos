@@ -3,7 +3,7 @@
     <q-card  square flat class="q-dialog-plugin bg-transparent" style="min-width: 700px;margin-top: 100px">
       <q-form @submit="onSubmit">
         <q-card-section class="q-pa-none">
-          <SimpleKeyboard
+          <SimpleKeyboardNew
             v-model="formValues.password"
             :placeholder="$t('base.password') + ' ...'"
             @onKeyPress="args => { if(args === '{enter}') { onSubmit() } }"
@@ -12,7 +12,7 @@
             <template v-slot:append>
               <q-icon name="password" />
             </template>
-          </SimpleKeyboard>
+          </SimpleKeyboardNew>
         </q-card-section>
         <q-card-actions class="q-pa-none flex justify-end  q-mt-sm text-right">
           <q-btn no-caps icon="cancel" size="lg" square  @click="onDialogCancel"  color="negative" unelevated :label="$t('base.cancel')" type="button"/>

@@ -265,7 +265,7 @@ const maxHeight = computed(() => {
       <div v-if="orderProcess === 'product'" class="col-5 q-pa-xs">
         <q-card flat square style="height: calc(100vh - 10vh)">
           <q-card-section>
-            <SimpleKeyboard
+            <SimpleKeyboardNew
               v-model="searchProductInput"
               :debounce="1000"
               :placeholder="$t('base.search') + ' ...'"
@@ -276,7 +276,7 @@ const maxHeight = computed(() => {
               <template v-slot:append>
                 <q-icon name="search" />
               </template>
-            </SimpleKeyboard>
+            </SimpleKeyboardNew>
           </q-card-section>
           <q-card-section class="row q-pt-none">
             <q-scroll-area style="height: 500px; width: 100%!important;">
