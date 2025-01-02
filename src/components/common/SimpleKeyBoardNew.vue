@@ -113,7 +113,7 @@ const setupKeyBoard = () => {
       theme: 'hg-theme-default',
       physicalKeyboardHighlight: true,
       physicalKeyboardHighlightPress: false,
-      autoUseTouchEvents: true,
+      autoUseTouchEvents: false,
       display: {
         '{bksp}': '←',
         '{tab}': 'Tab ⇄',
