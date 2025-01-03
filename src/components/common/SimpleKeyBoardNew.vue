@@ -7,13 +7,11 @@
     :placeholder="placeholder"
     :type="type"
     :class="inputClass"
-
     bg-color="white"
     color="secondary"
     @blur="onBlurInput"
     @focus="onFocusInput"
   >
-    <!--    :autofocus="autofocus"-->
     <template v-for="slotName in slotNames" v-slot:[slotName]="props">
       <slot :name="slotName" v-bind="{ props }"/>
     </template>
@@ -198,6 +196,48 @@ const onKeyPress = (button) => {
   }
 };
 
+
+onMounted(() => {
+  document.addEventListener("mousedown", handleClickOutside);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      onKeyPress('{enter}');
+    }
+
+    if (e.key === 'Backspace') {
+      if (props.debounce > 300) {
+        onHandleDebounce();
+      }
+      const windowActiveEl = document.activeElement;
+      const inputElement = document.querySelector( `input[id="${props.inputName}"]`);
+      if (keyboardVisible.value && inputElement !== windowActiveEl && props.type !== 'textarea') {
+        input.value = input.value?.slice(0, -1);
+        keyboard.value.setInput(input.value);
+      }
+    }
+    if (e.key.length === 1) {
+      const windowActiveEl = document.activeElement;
+      const inputElement = document.querySelector( `input[id="${props.inputName}"]`);
+      if (keyboardVisible.value && inputElement !== windowActiveEl && props.type !== 'textarea') {
+        input.value += e.key;
+        keyboard.value.setInput(input.value);
+      }
+    }
+  });
+})
+onBeforeUnmount(() => {
+  document.removeEventListener("mousedown", handleClickOutside);
+});
+
+router.afterEach(() => {
+  if (keyboard.value) {
+    keyboard.value.destroy();
+    keyboard.value = null;
+  }
+  keyboardVisible.value = false;
+});
+
 const handleShift = () => {
   if (keyboard.value) {
     keyboard.value.setOptions({
@@ -222,34 +262,6 @@ const handleClickOutside = (event) => {
     }
   }
 };
-
-onMounted(() => {
-  document.addEventListener("mousedown", handleClickOutside);
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      onKeyPress('{enter}');
-    }
-
-    if (e.key === 'Backspace') {
-      if (props.debounce > 300) {
-        onHandleDebounce();
-      }
-    }
-
-  });
-})
-onBeforeUnmount(() => {
-  document.removeEventListener("mousedown", handleClickOutside);
-});
-
-router.afterEach(() => {
-  if (keyboard.value) {
-    keyboard.value.destroy();
-    keyboard.value = null;
-  }
-  keyboardVisible.value = false;
-});
 
 </script>
 
