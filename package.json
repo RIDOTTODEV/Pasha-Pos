@@ -25,8 +25,8 @@
     "prebuild:girne": "yarn lint",
     "dev:saray": "ENVIRONMENT=saray quasar dev",
     "build:saray": "ENVIRONMENT=saray quasar build",
-    "dev:newdevelopment": "ENVIRONMENT=newDevelopment quasar dev",
-    "build:newdevelopment": "ENVIRONMENT=newDevelopment quasar build",
+    "dev:newdevelopment": "ENVIRONMENT=ridotto quasar dev",
+    "build:newdevelopment": "ENVIRONMENT=ridotto quasar build",
     "prebuild:saray": "yarn lint"
   },
   "dependencies": {

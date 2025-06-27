@@ -85,16 +85,16 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}-lefkosa
           labels: ${{ steps.meta.outputs.labels }}-lefkosa
 
-      - name: Build and push New Development
+      - name: Build and push Ridotto
         uses: docker/build-push-action@v2
         with:
           context: .
           build-args:
-            casino=newDevelopment
+            casino=ridotto
           platforms: linux/amd64 #,linux/arm64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}-newDevelopment
-          labels: ${{ steps.meta.outputs.labels }}-newDevelopment
+          tags: ${{ steps.meta.outputs.tags }}-ridotto
+          labels: ${{ steps.meta.outputs.labels }}-ridotto
 #
 #      - name: Build and push Girne
 #        uses: docker/build-push-action@v2
