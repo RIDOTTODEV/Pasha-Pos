@@ -84,6 +84,16 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}-lefkosa
           labels: ${{ steps.meta.outputs.labels }}-lefkosa
+      - name: Build and push New Development
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args:
+            casino=newdevelopment
+          platforms: linux/amd64 #,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}-newdevelopment
+          labels: ${{ steps.meta.outputs.labels }}-newdevelopment
 #
 #      - name: Build and push Girne
 #        uses: docker/build-push-action@v2
