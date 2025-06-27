@@ -358,27 +358,6 @@ const statusColors = [
                   icon="clear"
                   class="  q-mr-sm"/>
               </div>
-<!--              <q-input-->
-<!--                type="text"-->
-<!--                dense-->
-<!--                filled-->
-<!--                v-model="filterInput"-->
-<!--                :placeholder="$t('base.search')+'...'"-->
-<!--                autofocus-->
-<!--                clearable-->
-<!--                class="super-small q-pa-xs"-->
-<!--                style="min-width: 350px!important;"-->
-<!--              >-->
-<!--                <template v-slot:append>-->
-<!--                  <q-icon name="search"/>-->
-<!--                </template>-->
-<!--                <template v-slot:after>-->
-<!--                  <q-btn v-if="createButton.fn !==null" :label="createButton.title" unelevated color="blue-grey-8"-->
-<!--                         @click="createButton.fn" no-caps-->
-<!--                         icon="add" class=" q-pr-sm" dense/>-->
-<!--                </template>-->
-<!--              </q-input>-->
-
               <SimpleKeyboardNew
                 v-model="filterInput"
                 :placeholder="$t('base.search') + ' ...'"
